@@ -5,8 +5,8 @@
 
 		var debug = false;
 
-		$scope.delTimeInit = 5 * 1000;
-		$scope.timerInit = 15 * 60 * 1000;
+		$scope.delTimeInit = 15 * 1000;
+		$scope.timerInit = 5 * 60 * 1000;
 
 		$scope.timer = $scope.timerInit;
 		$scope.deleteTimer = $scope.delTimeInit;
@@ -14,6 +14,16 @@
 		$scope.started = false;
 
 		$scope.ctn = angular.element(document.querySelector('#container'));
+
+
+		$scope.font = "lustria";
+
+		$scope.showSplash = true;
+
+		// $interval(function(argument) {
+		// 	$scope.showSplash = false;
+		// }, 3000);
+
 
 
 		$interval(function() { // 1/100th second interval counter
@@ -73,4 +83,14 @@
 
 
 	});
+
+
+
+
+
+
+
+
+
+
 })()
