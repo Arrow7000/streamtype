@@ -1,0 +1,22 @@
+{
+  "name": "flowstate",
+  "version": "1.0.0",
+  "description": "A clone of the Flowstate app for OSX and iOS. But for everyone with a browser. And free. \r ## Try it out\r Try it on [aronadler.com/flowstate](http://aronadler.com/flowstate).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arrow7000/Flowstate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Arrow7000/Flowstate/issues"
+  },
+  "homepage": "https://github.com/Arrow7000/Flowstate#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
