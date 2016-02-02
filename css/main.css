@@ -77,7 +77,7 @@ body.font-lato {
   font-family: 'Cardo', 'Playfair Display', sans-serif;
   font-size: 4em;
 }
-.splash.splash-false {
+.splash.splash-on-false {
   opacity: 0;
   z-index: -1;
 }

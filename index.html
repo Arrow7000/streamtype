@@ -18,11 +18,11 @@
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <div class="splash splash-{{showSplash}}">
+    <div class="splash splash-on-{{showSplash}}">
         <p>Stream</p>
     </div>
     <div class="timer" ng-cloak>{{timer | date : "m:ss"}}</div>
-    <div class="container" id="container" contenteditable spellcheck="false" ng-model="text" style="opacity:{{deleteTimer/delTimeInit}};"></div>
+    <div class="container" id="container" contenteditable="{{!showSplash}}" spellcheck="false" ng-model="text" style="opacity:{{deleteTimer/delTimeInit}};"></div>
     <!-- <div class="del-timer">{{deleteTimer / 1000}}</div> -->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

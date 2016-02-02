@@ -20,9 +20,9 @@
 
 		$scope.showSplash = true;
 
-		// $interval(function(argument) {
-		// 	$scope.showSplash = false;
-		// }, 3000);
+		$interval(function() {
+			$scope.showSplash = false;
+		}, 3000);
 
 
 
