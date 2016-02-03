@@ -92,10 +92,6 @@
         // }, 5000);
 
 
-        $scope.flash = function() {
-            // $scope.text += ' test';
-            console.log("Hover!");
-        }
 
         var bible = 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
 
@@ -103,6 +99,7 @@
         // Tenth second interval counter - always running
         var mainInterval = $interval(function() {
 
+            // Before timer has completed
             if ($scope.mainTimerOn) {
                 // When Splash is on and haven't finished printing all Bible text yet
                 if ($scope.showSplash && $scope.text.length < bible.length) {
@@ -136,6 +133,8 @@
                 if ($scope.timer <= 0) {
                     $scope.mainTimerOn = false;
                 }
+
+                // After timer has completed
             } else {
                 $scope.timer = $scope.chosenDur;
                 $scope.deleteTimer = $scope.delTimeInit;

@@ -99,11 +99,11 @@ body.font-lato {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 .splash>.splash-holder>.selectors .selector {
-  font-size: 0.6em;
+  font-size: 0.5em;
   flex-basis: 30%;
 }
 .splash>.splash-holder>.selectors .selector .select-list-item {
@@ -114,13 +114,20 @@ body.font-lato {
 .splash>.splash-holder>.selectors .selector .select-list-item .mins-label {
   text-transform: none;
 }
+.splash>.splash-holder>.selectors .selector .select-list-item:hover {
+  color: rgba(248,248,248,0.75);
+}
 .splash>.splash-holder>.selectors .selector .select-list-item.chosen-true {
   color: #f8f8f8;
 }
 .splash>.splash-holder .enter-button {
-  padding-top: 100px;
+  margin-top: 100px;
   font-size: 0.5em;
   cursor: pointer;
+  color: rgba(248,248,248,0.75);
+}
+.splash>.splash-holder .enter-button:hover {
+  color: #f8f8f8;
 }
 .container {
   color: #f8f8f8;

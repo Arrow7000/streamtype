@@ -26,23 +26,26 @@
                 <div class="selector font-select">L</div> -->
                 <!-- <selector class="selector"></selector> -->
                 <!-- <selector class="selector"></selector> -->
-                <div class="selector time-select " ng-mouseover="durChoosing = true" ng-mouseleave="durChoosing = false">
-                    <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span></span>
+                <div class="selector time-select" ng-cloak ng-mouseover="durChoosing = true" ng-mouseleave="durChoosing = false">
+                    <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span>&nbsp;</span>
                     </span>
                 </div>
-                <div class="selector font-select " ng-mouseover="fontChoosing = true" ng-mouseleave="fontChoosing = false">
+                <div class="selector font-select" ng-cloak ng-mouseover="fontChoosing = true" ng-mouseleave="fontChoosing = false">
                     <span ng-repeat="font in fonts" id="font-{{font}}" class="select-list-item chosen-{{chosenFont === font}}" ng-if="fontChoosing || chosenFont === font" ng-click="selectFont(font)">{{font}} </span>
                 </div>
             </div>
-            <div class="enter-button" ng-cloak ng-mousedown="startEnterTimer()" ng-mouseup="stopEnterTimer()" style="opacity: 1">
-                <span ng-if="!enterTimerStarted">Start typing for {{chosenDur}} minute<span ng-if="chosenDur > 1">s</span>.</span>
+            <div class="enter-button" ng-cloak ng-click="showSplash = false" style="opacity: 1">
+                <span ng-if="!enterTimerStarted">Click here to start typing for {{chosenDur}} minute<span ng-if="chosenDur > 1">s</span>.</span>
                 <span ng-if="enterTimerStarted">Starting in...</span>
             </div>
         </div>
     </div>
-    <div class="timer" ng-cloak>{{timer | date : "m:ss"}}</div>
+    <div class="timer" ng-cloak>
+        <span ng-if="timer > 60*60*1000">{{timer | date : "h:mm:ss"}}</span>
+        <span ng-if="timer < 60*60*1000">{{timer | date : "m:ss"}}</span>
+    </div>
     <div class="container" id="container" edit contenteditable="{{!showSplash}}" spellcheck="false" style="opacity:{{deleteTimer/delTimeInit}};" ng-model="text"></div>
-    <!-- <p class="show-text">{{chosenFont}}</p> -->
+    <!-- <p class="show-text">{{timer}}</p> -->
     <!-- <div class="del-timer">{{deleteTimer / 1000}}</div> -->
     <script>
     (function(b, o, i, l, e, r) {
