@@ -22,10 +22,16 @@
         <div class="splash-holder">
             <p class="title">Stream</p>
             <div class="selectors">
-         <!--   <div class="selector time-select">180</div>
+                <!--   <div class="selector time-select">180</div>
                 <div class="selector font-select">L</div> -->
-                <selector class="selector"></selector>
-                <selector class="selector"></selector>
+                <!-- <selector class="selector"></selector> -->
+                <!-- <selector class="selector"></selector> -->
+                <div class="selector time-select " ng-mouseover="durChoosing = true" ng-mouseleave="durChoosing = false">
+                    <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span></span> </span>
+                </div>
+                <div class="selector font-select " ng-mouseover="fontChoosing = true" ng-mouseleave="fontChoosing = false">
+                    <span ng-repeat="font in fonts" id="font-{{font}}" class="select-list-item chosen-{{chosenFont === font}}" ng-if="fontChoosing || chosenFont === font" ng-click="selectFont(font)">{{font}} </span>
+                </div>
             </div>
         </div>
     </div>

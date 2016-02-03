@@ -5,21 +5,49 @@
 
         var debug = false;
 
-        $scope.delTimeInit = 5 * 1000;
-        $scope.timerInit = 15 * 60 * 1000;
-
-        $scope.timer = $scope.timerInit;
-        $scope.deleteTimer = $scope.delTimeInit;
-
+        // Writing app
         $scope.started = false;
         $scope.text = '';
 
+
+        // Font chooser
         $scope.fonts = ["lustria", "inconsolata", "lato"];
         $scope.fontChoosing = false;
         $scope.chosenFont = $scope.fonts[0];
         $scope.selectFont = function(font) {
             $scope.chosenFont = font;
         }
+
+
+        // Duration chooser
+        $scope.durations = [1, 5, 10, 15, 30, 45, 60, 120, 180];
+        $scope.durChoosing = false;
+        // $scope.chosenDur = 15;
+        $scope.selectDur = function(dur) {
+            $scope.chosenDur = dur;
+            $scope.timer = $scope.chosenDur * 60 * 1000;
+        }
+
+
+        /// Timing initialisers
+        // Deletion timer
+        $scope.delTimeInit = 5 * 1000;
+
+
+
+        // Stream timer
+        $scope.chosenDur = 15;
+        $scope.timer = $scope.chosenDur * 60 * 1000;
+        $scope.deleteTimer = $scope.delTimeInit;
+
+
+
+
+
+
+
+
+
 
 
         $scope.ctn = angular.element(document.querySelector('#container'));
@@ -39,9 +67,9 @@
 
         $scope.showSplash = true;
 
-        // $interval(function() {
-        //     $scope.showSplash = false;
-        // }, 2000);
+        $interval(function() {
+            $scope.showSplash = false;
+        }, 15000);
 
 
         $scope.flash = function() {
@@ -68,7 +96,7 @@
                 $scope.deleteEverything();
             }
             if (!$scope.started) {
-                $scope.timer = $scope.timerInit;
+                $scope.timer = $scope.chosenDur * 60 * 1000;
             } else {
                 $scope.timer -= 100;
             }

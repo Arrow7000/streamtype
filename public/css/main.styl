@@ -124,9 +124,16 @@ body {
                 font-size: 0.6em;
                 // display: inline-block;
                 flex-basis: 30%;
-                text-transform: capitalize;
-                .font-list-item {
+                .select-list-item {
+                    text-transform: capitalize;
+                    .mins-label {
+                        text-transform: none;
+                    }
                     cursor: pointer;
+                    color: alpha( textCol, 0.5);
+                    &.chosen-true {
+                        color: textCol;
+                    }
                 }
             }
         }

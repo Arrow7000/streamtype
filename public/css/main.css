@@ -104,10 +104,17 @@ body.font-lato {
 .splash>.splash-holder>.selectors .selector {
   font-size: 0.6em;
   flex-basis: 30%;
-  text-transform: capitalize;
 }
-.splash>.splash-holder>.selectors .selector .font-list-item {
+.splash>.splash-holder>.selectors .selector .select-list-item {
+  text-transform: capitalize;
   cursor: pointer;
+  color: rgba(248,248,248,0.5);
+}
+.splash>.splash-holder>.selectors .selector .select-list-item .mins-label {
+  text-transform: none;
+}
+.splash>.splash-holder>.selectors .selector .select-list-item.chosen-true {
+  color: #f8f8f8;
 }
 .container {
   color: #f8f8f8;
