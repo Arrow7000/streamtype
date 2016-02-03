@@ -66,7 +66,7 @@ textCol=#f8f8f8;
 }
 
 body {
-    font-family: 'Lustria', serif;
+    font-family: 'Lustria', 'Poppins', serif;
     &.font-lustria {
         // font-family: 'Lustria', serif;
     }
@@ -89,16 +89,47 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.5;
+    opacity: .8;
     transition: opacity 1s;
     -webkit-transition: opacity 1s, z-index 2s;
     text-align: center;
-    color: #ccc;
-    font-family: 'Cardo', 'Playfair Display', sans-serif;
+    color: #fff;
+    font-family: 'Playfair Display', sans-serif;
     font-size: 4em;
+    display: flex;
     &.splash-on-false {
         opacity: 0;
         z-index: -1;
+    }
+    &>.splash-holder {
+        width: 60vw;
+        // height: 70vh
+        margin: auto;
+        padding-bottom: 200px;
+        &>.title {
+            margin: 0 auto;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        &>.selectors {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            .selector {
+                // margin: auto;
+                // width: 49%;
+                font-size: 0.6em;
+                // display: inline-block;
+                flex-basis: 30%;
+                text-transform: capitalize;
+                .font-list-item {
+                    cursor: pointer;
+                }
+            }
+        }
     }
 }
 
@@ -113,7 +144,8 @@ body {
     outline: none;
     display: inline-block;
     z-index: 0;
-    position: fixed;
+    position: absolute;
+    overflow-x: hidden;
     top: 0;
     left: 0;
     &:empty:before {
@@ -123,9 +155,17 @@ body {
         color: alpha(textCol, .5);
         opacity: 1;
     }
-    &>div {
+    &>br {
         margin-bottom: 15px;
     }
+}
+
+.show-text {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    color: textCol;
+    z-index: 1;
 }
 
 .timer {

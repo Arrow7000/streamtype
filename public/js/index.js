@@ -14,25 +14,53 @@
         $scope.started = false;
         $scope.text = '';
 
+        $scope.fonts = ["lustria", "inconsolata", "lato"];
+        $scope.fontChoosing = false;
+        $scope.chosenFont = $scope.fonts[0];
+        $scope.selectFont = function(font) {
+            $scope.chosenFont = font;
+        }
+
 
         $scope.ctn = angular.element(document.querySelector('#container'));
+        // $scope.ctn.on('keydown', function(e) {
+        //     console.log("Keypress");
+        //     if (e.keyCode == 13) {
+        //         console.log("Enter");
+        //         window.event.cancelBubble = true;
+        //         event.returnValue = false;
+        //         // insertTextAtCursor('\n');
+        //         // $scope.text += '\n';
+        //     }
+        // });
 
 
-        $scope.font = "lustria";
+
 
         $scope.showSplash = true;
 
-        $interval(function() {
-            $scope.showSplash = false;
-        }, 3000);
+        // $interval(function() {
+        //     $scope.showSplash = false;
+        // }, 2000);
 
 
+        $scope.flash = function() {
+            // $scope.text += ' test';
+            console.log("Hover!");
+        }
 
-
+        var bible = 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
 
 
         $interval(function() { // 1/100th second interval counter
-            if ($scope.showSplash) $scope.text += 'a ';
+            if ($scope.showSplash && $scope.text.length < bible.length) {
+                $scope.started = true;
+                typeEvent();
+                // for (var i = 0; i < Things.length; i++) {
+                //     Things[i]
+                // };
+                $scope.text += bible[$scope.text.length];
+            }
             if ($scope.started && $scope.deleteTimer > 0) { // Before timer hits 0
                 $scope.deleteTimer -= 100; // Makes deletion timer decrement 
             }
@@ -53,11 +81,11 @@
         document.addEventListener("keydown", keydown, false);
 
         function keyup(e) {
-            typeEvent(e);
+            if (!$scope.showSplash) typeEvent(e);
         }
 
         function keydown(e) {
-            typeEvent(e);
+            if (!$scope.showSplash) typeEvent(e);
         }
 
 
@@ -65,7 +93,8 @@
 
 
         $scope.deleteEverything = function() {
-            $scope.ctn.empty();
+            // $scope.ctn.empty();
+            $scope.text = '';
             $scope.deleteTimer = $scope.delTimeInit;
             $scope.started = false;
             if (debug) console.log("Timer ran out!");
@@ -79,11 +108,11 @@
             if (debug) {
                 console.log("Typing...");
                 console.log("$scope.started", $scope.started);
-                console.log("$scope.ctn.text().length", $scope.ctn.text().length);
+                console.log("$scope.text().length", $scope.text().length);
             }
 
             $scope.deleteTimer = $scope.delTimeInit;
-            if ($scope.ctn.text().length > 0) $scope.started = true;
+            if ($scope.text.length > 0) $scope.started = true;
         }
 
 
@@ -92,8 +121,83 @@
 
 
 
+    // Allows 'edit' attr-element to be bound to $scope variable
+    app.directive("edit", function() {
+        return {
+            restrict: "A",
+            require: "ngModel",
+            link: function(scope, element, attrs, ngModel) {
+
+                function read() {
+                    ngModel.$setViewValue(element.html());
+                }
+
+                ngModel.$render = function() {
+                    element.html(ngModel.$viewValue || "");
+                };
+
+                element.bind("blur keyup change", function() {
+                    scope.$apply(read);
+                });
+            }
+        };
+    });
 
 
+
+
+
+
+
+
+    app.directive("selector", function() {
+        return {
+            restrict: "E",
+            templateUrl: "templates/selector.html"
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+    // app.directive('caret', function() {
+
+    //     function setCaretPosition(elem, caretPos) {
+    //         if (elem !== null) {
+    //             if (elem.createTextRange) {
+    //                 var range = elem.createTextRange();
+    //                 range.move('character', caretPos);
+    //                 range.select();
+    //             } else {
+    //                 if (elem.setSelectionRange) {
+    //                     elem.focus();
+    //                     elem.setSelectionRange(caretPos, caretPos);
+    //                 } else
+    //                     elem.focus();
+    //             }
+    //         }
+    //     }
+
+    //     return {
+    //         scope: {
+    //             value: '=ngModel'
+    //         },
+    //         link: function(scope, element, attrs) {
+    //             var caret = Number(attrs.caret);
+    //             scope.$watch('value', function(newValue, oldValue) {
+    //                 if (newValue && newValue != oldValue && !isNaN(newValue) && newValue.length > (caret + 1)) {
+    //                     setCaretPosition(element[0], caret);
+    //                 }
+    //             });
+    //         }
+    //     };
+    // });
 
 
 

@@ -51,7 +51,7 @@ textarea {
   box-sizing: border-box;
 }
 body {
-  font-family: 'Lustria', serif;
+  font-family: 'Lustria', 'Poppins', serif;
   background-color: #303;
 }
 body.font-inconsolata {
@@ -70,17 +70,44 @@ body.font-lato {
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.5;
+  opacity: 0.8;
   transition: opacity 1s;
   -webkit-transition: opacity 1s, z-index 2s;
   text-align: center;
-  color: #ccc;
-  font-family: 'Cardo', 'Playfair Display', sans-serif;
+  color: #fff;
+  font-family: 'Playfair Display', sans-serif;
   font-size: 4em;
+  display: flex;
 }
 .splash.splash-on-false {
   opacity: 0;
   z-index: -1;
+}
+.splash>.splash-holder {
+  width: 60vw;
+  margin: auto;
+  padding-bottom: 200px;
+}
+.splash>.splash-holder>.title {
+  margin: 0 auto;
+  font-size: 1.4em;
+  text-align: center;
+}
+.splash>.splash-holder>.selectors {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.splash>.splash-holder>.selectors .selector {
+  font-size: 0.6em;
+  flex-basis: 30%;
+  text-transform: capitalize;
+}
+.splash>.splash-holder>.selectors .selector .font-list-item {
+  cursor: pointer;
 }
 .container {
   color: #f8f8f8;
@@ -93,7 +120,8 @@ body.font-lato {
   outline: none;
   display: inline-block;
   z-index: 0;
-  position: fixed;
+  position: absolute;
+  overflow-x: hidden;
   top: 0;
   left: 0;
 }
@@ -103,8 +131,15 @@ body.font-lato {
   color: rgba(248,248,248,0.5);
   opacity: 1;
 }
-.container>div {
+.container>br {
   margin-bottom: 15px;
+}
+.show-text {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  color: #f8f8f8;
+  z-index: 1;
 }
 .timer {
   position: fixed;

@@ -8,21 +8,30 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display|Cardo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display|Cardo|Poppins' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="js/index.js"></script>
 </head>
 
-<body ng-controller="mainController as ctrl" class="font-{{font}}">
-    <!--[if lt IE 8]>
+<body ng-controller="mainController as ctrl" class="font-{{chosenFont}}">
+    <!--[if IE]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div class="splash splash-on-{{showSplash}}">
-        <p>Stream</p>
+        <div class="splash-holder">
+            <p class="title">Stream</p>
+            <div class="selectors">
+         <!--   <div class="selector time-select">180</div>
+                <div class="selector font-select">L</div> -->
+                <selector class="selector"></selector>
+                <selector class="selector"></selector>
+            </div>
+        </div>
     </div>
     <div class="timer" ng-cloak>{{timer | date : "m:ss"}}</div>
-    <div class="container" id="container" contenteditable="{{!showSplash}}" spellcheck="false" style="opacity:{{deleteTimer/delTimeInit}};">{{text}}</div>
+    <div class="container" id="container" edit contenteditable="{{!showSplash}}" spellcheck="false" style="opacity:{{deleteTimer/delTimeInit}};" ng-model="text"></div>
+    <!-- <p class="show-text">{{chosenFont}}</p> -->
     <!-- <div class="del-timer">{{deleteTimer / 1000}}</div> -->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
