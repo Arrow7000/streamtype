@@ -5,7 +5,8 @@
 
         var debug = false;
 
-        // Writing app
+        // Writing app primary functions
+        $scope.mainTimerOn = true;
         $scope.started = false;
         $scope.text = '';
 
@@ -99,26 +100,49 @@
         var bible = 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
 
 
-        $interval(function() { // 1/100th second interval counter
-            if ($scope.showSplash && $scope.text.length < bible.length) {
-                $scope.started = true;
-                typeEvent();
-                // for (var i = 0; i < Things.length; i++) {
-                //     Things[i]
-                // };
-                $scope.text += bible[$scope.text.length];
-            }
-            if ($scope.started && $scope.deleteTimer > 0) { // Before timer hits 0
-                $scope.deleteTimer -= 100; // Makes deletion timer decrement 
-            }
-            if ($scope.started && $scope.deleteTimer <= 0 * 1000) { // When timer hits zero
-                $scope.deleteEverything();
-            }
-            if (!$scope.started) {
-                $scope.timer = $scope.chosenDur * 60 * 1000;
+        // Tenth second interval counter - always running
+        var mainInterval = $interval(function() {
+
+            if ($scope.mainTimerOn) {
+                // When Splash is on and haven't finished printing all Bible text yet
+                if ($scope.showSplash && $scope.text.length < bible.length) {
+                    // Types automatically when Splash screen is on
+                    $scope.started = true;
+                    typeEvent();
+                    $scope.text += bible[$scope.text.length];
+                }
+
+                // Started typing and before timer hits 0
+                if ($scope.started && $scope.deleteTimer > 0) {
+                    // Makes deletion timer decrement 
+                    $scope.deleteTimer -= 100;
+                }
+
+                // When deleteTimer hits zero
+                if ($scope.started && $scope.deleteTimer <= 0 * 1000) {
+                    // Delete ALL text
+                    $scope.deleteEverything();
+                }
+
+                // Checks if started typing yet
+                if (!$scope.started) {
+                    // Makes timer stay at initial value
+                    $scope.timer = $scope.chosenDur * 60 * 1000;
+                } else {
+                    // Decrements timer
+                    $scope.timer -= 100;
+                }
+
+                if ($scope.timer <= 0) {
+                    $scope.mainTimerOn = false;
+                }
             } else {
-                $scope.timer -= 100;
+                $scope.timer = $scope.chosenDur;
+                $scope.deleteTimer = $scope.delTimeInit;
             }
+
+
+
 
 
         }, 100);
