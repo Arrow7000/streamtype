@@ -22,7 +22,7 @@
         <p>Stream</p>
     </div>
     <div class="timer" ng-cloak>{{timer | date : "m:ss"}}</div>
-    <div class="container" id="container" contenteditable="{{!showSplash}}" spellcheck="false" ng-model="text" style="opacity:{{deleteTimer/delTimeInit}};"></div>
+    <div class="container" id="container" contenteditable="{{!showSplash}}" spellcheck="false" style="opacity:{{deleteTimer/delTimeInit}};">{{text}}</div>
     <!-- <div class="del-timer">{{deleteTimer / 1000}}</div> -->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

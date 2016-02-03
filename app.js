@@ -3,8 +3,8 @@ var app = express();
 var server = require('http').createServer(app);
 
 // Sets the static file folders
-app.use("/js", express.static(__dirname + "/js"));
-app.use("/css", express.static(__dirname + "/css"));
+app.use("/", express.static(__dirname + "/public"));
+// app.use("/css", express.static(__dirname + "/css"));
 
 // Send & response function
 
@@ -15,10 +15,11 @@ server.listen(port, function() {
 });
 
 
-app.get('/', function(req, res) {
-	res.sendFile(__dirname + '/index.html');
-	console.log("Page requested");
-});
+// app.get('/', function(req, res) {
+            // 	res.sendFile(__dirname + '/index.html');
+            // 	console.log("Page requested");
+            // });
+
 
 
 

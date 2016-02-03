@@ -70,8 +70,9 @@ body.font-lato {
   position: fixed;
   top: 0;
   left: 0;
+  opacity: 0.5;
   transition: opacity 1s;
-  -webkit-transition: opacity 1s;
+  -webkit-transition: opacity 1s, z-index 2s;
   text-align: center;
   color: #ccc;
   font-family: 'Cardo', 'Playfair Display', sans-serif;
