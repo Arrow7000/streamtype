@@ -44,6 +44,24 @@
 
 
 
+        // Clicking on button to enter app
+        $scope.enterTimerStarted = false;
+        var promise;
+        $scope.startEnterTimer = function() {
+            console.log("Mouse down!");
+            $scope.enterTimerStarted = true;
+            promise = $interval(function() {
+                $scope.showSplash = false;
+            }, 3);
+        }
+
+        $scope.stopEnterTimer = function() {
+            console.log("Mouse up!");
+            $scope.enterTimerStarted = false;
+            $interval.cancel(promise);
+        }
+
+
 
 
 
@@ -67,9 +85,10 @@
 
         $scope.showSplash = true;
 
-        $interval(function() {
-            $scope.showSplash = false;
-        }, 15000);
+        // Makes splash screen go away after time interval
+        // $interval(function() {
+        //     $scope.showSplash = false;
+        // }, 5000);
 
 
         $scope.flash = function() {
