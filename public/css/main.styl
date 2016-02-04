@@ -85,7 +85,7 @@ body {
     width: 100%;
     width: 100vw;
     background-color: #181818;
-    z-index: 1;
+    z-index: 10;
     position: fixed;
     top: 0;
     left: 0;
@@ -97,9 +97,11 @@ body {
     font-family: 'Playfair Display', sans-serif;
     font-size: 4em;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     &.splash-on-false {
         opacity: 0;
-        z-index: -1;
+        z-index: -10;
     }
     &>.splash-holder {
         width: 60vw;
@@ -111,6 +113,7 @@ body {
             font-size: 1.4em;
             text-align: center;
             padding-bottom: 60px;
+            cursor: context-menu;
         }
         &>.selectors {
             width: 100%;
@@ -138,17 +141,42 @@ body {
                     &.chosen-true {
                         color: textCol;
                     }
+                    &#font-lustria {
+                        font-family: 'Lustria', serif;
+                    }
+                    &#font-inconsolata {
+                        font-family: 'Inconsolata', sans-serif;
+                    }
+                    &#font-lato {
+                        font-family: 'Lato', sans-serif;
+                    }
                 }
             }
         }
         .enter-button {
             margin-top: 100px;
             font-size: 0.5em;
-            cursor: pointer;
-            color: alpha(textCol, 0.75);
-            &:hover {
-                color: textCol;
+            .enter-button-inner {
+                cursor: pointer;
+                color: alpha(textCol, 0.75);
+                &:hover {
+                    color: textCol;
+                }
             }
+        }
+    }
+    .messages {
+        position: fixed;
+        bottom: 50px;
+        display: block;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.25em;
+        opacity: 0;
+        transition: opacity 0.5s;
+        &.show-message-true {
+            opacity: 1;
         }
     }
 }
@@ -180,20 +208,19 @@ body {
     }
 }
 
-.show-text {
-    position: fixed;
-    top: 50px;
-    left: 50px;
-    color: textCol;
-    z-index: 1;
-}
-
+// .show-text {
+//     position: fixed;
+//     top: 50px;
+//     left: 50px;
+//     color: textCol;
+//     z-index: 1;
+// }
 .timer {
     position: fixed;
     top: 50px;
     right: 50px;
     color: textCol;
-    z-index: 0;
+    z-index: 1;
 }
 
 .del-timer {

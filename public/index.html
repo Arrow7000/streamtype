@@ -20,27 +20,31 @@
         <![endif]-->
     <div class="splash splash-on-{{showSplash}}">
         <div class="splash-holder">
-            <p class="title">Stream</p>
+            <p class="title">
+                <span ng-mouseover="message = messages.default; defaultHover = true" ng-mouseleave="defaultHover = false">Stream</span>
+            </p>
             <div class="selectors">
-                <!--   <div class="selector time-select">180</div>
-                <div class="selector font-select">L</div> -->
-                <!-- <selector class="selector"></selector> -->
-                <!-- <selector class="selector"></selector> -->
-                <div class="selector time-select" ng-cloak ng-mouseover="durChoosing = true" ng-mouseleave="durChoosing = false">
+                <!-- Selectors -->
+                <div class="selector time-select" ng-cloak ng-mouseover="durChoosing = true; message = messages.timeHover" ng-mouseleave="durChoosing = false">
                     <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span>&nbsp;</span>
                     </span>
                 </div>
-                <div class="selector font-select" ng-cloak ng-mouseover="fontChoosing = true" ng-mouseleave="fontChoosing = false">
-                    <span ng-repeat="font in fonts" id="font-{{font}}" class="select-list-item chosen-{{chosenFont === font}}" ng-if="fontChoosing || chosenFont === font" ng-click="selectFont(font)">{{font}} </span>
+                <div class="selector font-select" ng-cloak ng-mouseover="fontChoosing = true; message = messages.fontHover" ng-mouseleave="fontChoosing = false">
+                    <span ng-repeat="font in fonts" id="font-{{font}}" class="select-list-item chosen-{{chosenFont === font}}" ng-if="fontChoosing || chosenFont === font" ng-click="selectFont(font)">{{font}} <br></span>
                 </div>
             </div>
-            <div class="enter-button" ng-cloak ng-click="showSplash = false" style="opacity: 1">
+            <div class="enter-button" ng-cloak >
+            <span class="enter-button-inner" ng-mouseover="defaultHover = true; message = messages.enterButton" ng-mouseleave="defaultHover = false" ng-click="showSplash = false">
                 <span ng-if="!enterTimerStarted">Click here to start typing for {{chosenDur}} minute<span ng-if="chosenDur > 1">s</span>.</span>
                 <span ng-if="enterTimerStarted">Starting in...</span>
+                </span>
             </div>
         </div>
+        <div class="messages show-message-{{durChoosing || fontChoosing || defaultHover}}" ng-cloak>
+            {{message}}
+        </div>
     </div>
-    <div class="timer" ng-cloak>
+    <div class="timer" ng-cloak ng-click="increaseTimer(5)">
         <span ng-if="timer >= 60*60*1000">{{timer | date : "h:mm:ss"}}</span>
         <span ng-if="timer < 60*60*1000">{{timer | date : "m:ss"}}</span>
     </div>

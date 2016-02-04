@@ -66,7 +66,7 @@ body.font-lato {
   width: 100%;
   width: 100vw;
   background-color: #181818;
-  z-index: 1;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;
@@ -78,10 +78,12 @@ body.font-lato {
   font-family: 'Playfair Display', sans-serif;
   font-size: 4em;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .splash.splash-on-false {
   opacity: 0;
-  z-index: -1;
+  z-index: -10;
 }
 .splash>.splash-holder {
   width: 60vw;
@@ -93,6 +95,7 @@ body.font-lato {
   font-size: 1.4em;
   text-align: center;
   padding-bottom: 60px;
+  cursor: context-menu;
 }
 .splash>.splash-holder>.selectors {
   width: 100%;
@@ -120,14 +123,39 @@ body.font-lato {
 .splash>.splash-holder>.selectors .selector .select-list-item.chosen-true {
   color: #f8f8f8;
 }
+.splash>.splash-holder>.selectors .selector .select-list-item#font-lustria {
+  font-family: 'Lustria', serif;
+}
+.splash>.splash-holder>.selectors .selector .select-list-item#font-inconsolata {
+  font-family: 'Inconsolata', sans-serif;
+}
+.splash>.splash-holder>.selectors .selector .select-list-item#font-lato {
+  font-family: 'Lato', sans-serif;
+}
 .splash>.splash-holder .enter-button {
   margin-top: 100px;
   font-size: 0.5em;
+}
+.splash>.splash-holder .enter-button .enter-button-inner {
   cursor: pointer;
   color: rgba(248,248,248,0.75);
 }
-.splash>.splash-holder .enter-button:hover {
+.splash>.splash-holder .enter-button .enter-button-inner:hover {
   color: #f8f8f8;
+}
+.splash .messages {
+  position: fixed;
+  bottom: 50px;
+  display: block;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.25em;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.splash .messages.show-message-true {
+  opacity: 1;
 }
 .container {
   color: #f8f8f8;
@@ -154,19 +182,12 @@ body.font-lato {
 .container>br {
   margin-bottom: 15px;
 }
-.show-text {
-  position: fixed;
-  top: 50px;
-  left: 50px;
-  color: #f8f8f8;
-  z-index: 1;
-}
 .timer {
   position: fixed;
   top: 50px;
   right: 50px;
   color: #f8f8f8;
-  z-index: 0;
+  z-index: 1;
 }
 .del-timer {
   position: fixed;

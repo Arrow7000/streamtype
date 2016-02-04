@@ -1,7 +1,7 @@
 {
   "name": "stream",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app for focused writing. If you stop writing for longer than 5 seconds everything you have written disappears irretrievably. Use with caution.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -10,6 +10,17 @@
         $scope.started = false;
         $scope.text = '';
 
+        $scope.defaultHover = false;
+        $scope.showMessage = true;
+        $scope.messages = {
+            default: "Welcome to Stream",
+            timeHover: "Select how long you want to write for",
+            fontHover: "Select which font you'd like to write in",
+            enterButton: "Click to begin. There is no turning back."
+        }
+        $scope.message = $scope.messages.default;
+
+
 
         // Font chooser
         $scope.fonts = ["lustria", "inconsolata", "lato"];
@@ -20,10 +31,14 @@
         }
 
 
-        // Duration chooser
+        /// Duration chooser
+
+        // chosenDur: in minutes
+        // timer: in milliseconds
+
         $scope.durations = [1, 5, 10, 15, 30, 45, 60, 120, 180];
+        $scope.chosenDur = 15;
         $scope.durChoosing = false;
-        // $scope.chosenDur = 15;
         $scope.selectDur = function(dur) {
             $scope.chosenDur = dur;
             $scope.timer = $scope.chosenDur * 60 * 1000;
@@ -37,10 +52,9 @@
 
 
         // Stream timer
-        $scope.chosenDur = 15;
+
         $scope.timer = $scope.chosenDur * 60 * 1000;
         $scope.deleteTimer = $scope.delTimeInit;
-
 
 
 
@@ -63,7 +77,11 @@
         }
 
 
-
+        $scope.increaseTimer = function(mins) {
+            var minMult = 60 * 1000;
+            $scope.chosenDur += mins;
+            $scope.timer += mins * minMult;
+        }
 
 
 
