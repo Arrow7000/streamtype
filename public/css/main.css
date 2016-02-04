@@ -135,7 +135,7 @@ body.font-lato {
   height: 100vh;
   width: 100%;
   width: 100vw;
-  padding: 100px;
+  padding: 100px 20%;
   font-size: 110%;
   outline: none;
   display: inline-block;

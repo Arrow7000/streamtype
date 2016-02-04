@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="timer" ng-cloak>
-        <span ng-if="timer > 60*60*1000">{{timer | date : "h:mm:ss"}}</span>
+        <span ng-if="timer >= 60*60*1000">{{timer | date : "h:mm:ss"}}</span>
         <span ng-if="timer < 60*60*1000">{{timer | date : "m:ss"}}</span>
     </div>
     <div class="container" id="container" edit contenteditable="{{!showSplash}}" spellcheck="false" style="opacity:{{deleteTimer/delTimeInit}};" ng-model="text"></div>
