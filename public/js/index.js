@@ -1,7 +1,7 @@
 (function() {
-    var app = angular.module('flowstate', []);
+    var app = angular.module('stream', []);
 
-    app.controller('mainController', function($scope, $interval) {
+    app.controller('mainController', function($scope, $interval, $http) {
 
         var debug = false;
 
@@ -14,7 +14,7 @@
         $scope.showMessage = true;
         $scope.messages = {
             default: "Welcome to Stream",
-            timeHover: "Select how long you want to write for",
+            timeHover: "Select how many minutes you want to write for",
             fontHover: "Select which font you'd like to write in",
             enterButton: "Click to begin. There is no turning back."
         }
@@ -104,14 +104,22 @@
 
         $scope.showSplash = true;
 
-        // Makes splash screen go away after time interval
+        /// Makes splash screen go away after time interval
         // $interval(function() {
         //     $scope.showSplash = false;
         // }, 5000);
 
+        var sampleTexts;
+        var sampleIndicator = 0;
+
+        $http.get("data/sample-text.json")
+            .success(function(data) {
+                sampleTexts = data;
+            });
 
 
-        var bible = 'In the beginning God created the heavens and the earth. Now the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
+
+        // 'In the beginning God created the heavens and the earth. \n\nNow the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
 
 
         // Tenth second interval counter - always running
@@ -120,11 +128,11 @@
             // Before timer has completed
             if ($scope.mainTimerOn) {
                 // When Splash is on and haven't finished printing all Bible text yet
-                if ($scope.showSplash && $scope.text.length < bible.length) {
+                if ($scope.showSplash && $scope.text.length < sampleTexts[sampleIndicator].length) {
                     // Types automatically when Splash screen is on
                     $scope.started = true;
                     typeEvent();
-                    $scope.text += bible[$scope.text.length];
+                    $scope.text += sampleTexts[sampleIndicator][$scope.text.length];
                 }
 
                 // Started typing and before timer hits 0
