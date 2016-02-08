@@ -1,0 +1,16 @@
+CACHE MANIFEST
+#1.0.4
+
+favicon.ico
+favicon.png
+index.html
+css/normalize.min.css
+css/main.css
+js/angular.min.js
+js/index.js
+
+NETWORK:
+*
+
+SETTINGS
+prefer-online

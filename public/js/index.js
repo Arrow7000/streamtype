@@ -128,11 +128,17 @@
             // Before timer has completed
             if ($scope.mainTimerOn) {
                 // When Splash is on and haven't finished printing all Bible text yet
-                if ($scope.showSplash && $scope.text.length < sampleTexts[sampleIndicator].length) {
-                    // Types automatically when Splash screen is on
-                    $scope.started = true;
-                    typeEvent();
-                    $scope.text += sampleTexts[sampleIndicator][$scope.text.length];
+                if ($scope.showSplash) {
+
+                    if (sampleIndicator >= sampleTexts.length) sampleIndicator = 0;
+
+                    if ($scope.text.length < sampleTexts[sampleIndicator].length) {
+                        // Types automatically when Splash screen is on
+                        $scope.started = true;
+                        typeEvent();
+                        $scope.text += sampleTexts[sampleIndicator][$scope.text.length];
+                    }
+
                 }
 
                 // Started typing and before timer hits 0
@@ -194,6 +200,9 @@
             $scope.deleteTimer = $scope.delTimeInit;
             $scope.started = false;
             if (debug) console.log("Timer ran out!");
+
+            // Makes next sample text display
+            if ($scope.showSplash) sampleIndicator++;
         };
 
 
