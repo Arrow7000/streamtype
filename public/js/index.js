@@ -109,7 +109,7 @@
         //     $scope.showSplash = false;
         // }, 5000);
 
-        var sampleTexts;
+        var sampleTexts =[];
         var sampleIndicator = 0;
 
         $http.get("data/sample-text.json")
@@ -190,6 +190,10 @@
             if (!$scope.showSplash) typeEvent(e);
         }
 
+        $scope.enterApp = function() {
+            $scope.showSplash = false;
+            $scope.deleteTimer = $scope.delTimeInit / 5;
+        }
 
 
 
