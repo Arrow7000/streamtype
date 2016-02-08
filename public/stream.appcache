@@ -1,0 +1,13 @@
+CACHE MANIFEST
+#1.0
+
+favicon.ico
+favicon.png
+index.html
+css/normalize.min.css
+css/main.css
+js/index.js
+
+
+NETWORK:
+*
