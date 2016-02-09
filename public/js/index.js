@@ -21,7 +21,7 @@
         }
         $scope.message = $scope.messages.default;
 
-        $scope.showFAQ = true;
+        $scope.showFAQ = false;
 
 
 
