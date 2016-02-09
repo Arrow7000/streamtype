@@ -16,9 +16,12 @@
             default: "Welcome to Stream",
             timeHover: "Select how many minutes you want to write for",
             fontHover: "Select which font you'd like to write in",
-            enterButton: "Click to begin. There is no turning back."
+            enterButton: "Click to begin. There is no turning back.",
+            helpButton: "We strongly recommend you read this before using Stream"
         }
         $scope.message = $scope.messages.default;
+
+        $scope.showFAQ = true;
 
 
 
@@ -109,7 +112,7 @@
         //     $scope.showSplash = false;
         // }, 5000);
 
-        var sampleTexts =[];
+        var sampleTexts = [];
         var sampleIndicator = 0;
 
         $http.get("data/sample-text.json")
@@ -119,7 +122,7 @@
 
 
 
-        // 'In the beginning God created the heavens and the earth. \n\nNow the earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters.';
+
 
 
         // Tenth second interval counter - always running
@@ -181,6 +184,7 @@
 
         document.addEventListener("keyup", keyup, false);
         document.addEventListener("keydown", keydown, false);
+        document.addEventListener("keydown", escape, false);
 
         function keyup(e) {
             if (!$scope.showSplash) typeEvent(e);
@@ -188,6 +192,11 @@
 
         function keydown(e) {
             if (!$scope.showSplash) typeEvent(e);
+        }
+
+        function escape(e) {
+            console.log(e.keyCode);
+            if (e.keyCode == 27) $scope.showFAQ = false;
         }
 
         $scope.enterApp = function() {

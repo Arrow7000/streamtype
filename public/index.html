@@ -7,34 +7,48 @@
     <link rel="shortcut icon" href="/favicon.ico?v=2" />
     <link rel="shortcut icon" href="/favicon.png?v=2" />
     <title ng-if="showSplash">Stream | Keep writing</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/index.js"></script>
     <title ng-if="!showSplash && timer >= 60*60*1000" ng-cloak>{{timer | date : "h:mm:ss"}} | Stream | Keep writing</title>
     <title ng-if="!showSplash && timer < 60*60*1000" ng-cloak>{{timer | date : "m:ss"}} | Stream | Keep writing</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display|Cardo|Poppins' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
-    <script src="js/angular.min.js"></script>
-    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
-<body class="font-{{chosenFont}}">
+<body class="font-{{chosenFont}} preload">
     <!--[if IE]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <!-- The splash screen: shows welcome and options choosers  -->
-    <div class="splash splash-on-{{showSplash}}">
+    <!--   <div class="splash splash-on-{{showFAQ}} faq-splash">
         <div class="splash-holder">
+            <p class="title">
+                <span>FAQ test</span>
+            </p>
+        </div>
+    </div> -->
+    <div class="splash splash-on-{{showSplash}}" ng-show="!showFAQ">
+        <div class="splash-holder faq-on-{{showFAQ}}">
             <p class="title">
                 <span ng-mouseover="message = messages.default; defaultHover = true" ng-mouseleave="defaultHover = false">Stream</span>
             </p>
             <div class="selectors">
                 <!-- Selectors -->
+                <!-- Time duration selector -->
                 <div class="selector time-select" ng-cloak ng-mouseover="durChoosing = true; message = messages.timeHover" ng-mouseleave="durChoosing = false">
                     <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span>&nbsp;</span>
                     </span>
                 </div>
+                <!--  <div class="selector time-select" ng-cloak ng-mouseover="durChoosing = true; message = messages.timeHover" ng-mouseleave="durChoosing = false">
+                    <span ng-repeat="dur in durations" id="dur-{{dur}}" class="select-list-item chosen-{{chosenDur === dur}}" ng-if="durChoosing || chosenDur === dur" ng-click="selectDur(dur)">{{dur}} <span class="mins-label" ng-if="!durChoosing">min<span ng-if="chosenDur > 1">s</span>&nbsp;</span>
+                    </span>
+                </div> -->
+                <!-- Font selector -->
                 <div class="selector font-select" ng-cloak ng-mouseover="fontChoosing = true; message = messages.fontHover" ng-mouseleave="fontChoosing = false">
                     <span ng-repeat="font in fonts" id="font-{{font}}" class="select-list-item chosen-{{chosenFont === font}}" ng-if="fontChoosing || chosenFont === font" ng-click="selectFont(font)">{{font}} <br></span>
                 </div>
@@ -45,10 +59,45 @@
                 <span ng-if="enterTimerStarted">Starting in...</span>
                 </span>
             </div>
+            <!-- FAQ screen -->
         </div>
         <div class="messages show-message-{{durChoosing || fontChoosing || defaultHover}}" ng-cloak>
             {{message}}
         </div>
+    </div>
+    <div class="splash splash-faq" ng-show="showFAQ" ng-cloak>
+        <div class="splash-faq-holder">
+            <p class="title">
+                FAQs
+            </p>
+            <div class="faq-body" ng-cloak>
+                <div class="faq-question">
+                    <p class="faq-q">What is Stream?</p>
+                    <p class="faq-a">Stream is a writing app that is not for the faint of heart: if you stop writing for more than 5 seconds it will delete everything you have written. Irretrievably and irrecoverably.
+                        <br>
+                        <br> We highly recommend that you start with 1 or 5 minute settings, to get used to how it works first. It is not recommended to start using this for longer than 5 minutes until you are familiar with the concept and are prepared to take on the risk of total deletion of all your work.
+                    </p>
+                </div>
+                <div class="faq-question">
+                    <p class="faq-q">I've just had three hours' worth of work deleted! Can I get it back?</p>
+                    <p class="faq-a">Unfortunately not. The 5 second timeout is a double edged sword. In order to focus the writer's mind completely, the risk has to be all-encompassing. This means that there is no way of recovering what has been deleted.
+                    </p>
+                </div>
+                <div class="faq-question">
+                    <p class="faq-q">Sounds terrifying but I'll give it a go!</p>
+                    <p class="faq-a">Great! We recommend you start with 1 minute - or 5 minutes max - session. This allows you to get a feel for the typing rhythym you should be aiming for, without risking too much.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="faq-close" ng-click="showFAQ = false">
+            <!-- <span class="close-x">+</span> -->
+            <div class="x-line x-vert"></div>
+            <div class="x-line x-hor"></div>
+        </div>
+    </div>
+    <div class="faq-button faq-on-{{showFAQ}} show-{{showSplash}}" ng-click="showFAQ = !showFAQ" ng-cloak ng-mouseover="message = messages.helpButton; defaultHover = true" ng-mouseleave="defaultHover = false">
+        What is Stream?
     </div>
     <!-- Timer in right top corner -->
     <div class="timer" ng-cloak ng-click="increaseTimer(5)">

@@ -64,9 +64,7 @@ body.font-lato {
   font-family: 'Lato', sans-serif;
 }
 .splash {
-  height: 100%;
   height: 100vh;
-  width: 100%;
   width: 100vw;
   background-color: #181818;
   z-index: 10;
@@ -74,7 +72,7 @@ body.font-lato {
   top: 0;
   left: 0;
   opacity: 0.8;
-  transition: opacity 1s;
+  transition: opacity 1s, z-index 2s;
   -webkit-transition: opacity 1s, z-index 2s;
   text-align: center;
   color: #fff;
@@ -83,10 +81,58 @@ body.font-lato {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-x: hidden;
 }
 .splash.splash-on-false {
   opacity: 0;
   z-index: -10;
+}
+.splash.splash-faq {
+  display: block;
+  position: absolute;
+}
+.splash.splash-faq .splash-faq-holder {
+  width: 750px;
+  margin: 0 auto;
+}
+.splash.splash-faq .splash-faq-holder .faq-body {
+  font-size: 0.4em;
+  padding-bottom: 100px;
+}
+.splash.splash-faq .splash-faq-holder .faq-body .faq-q {
+  font-size: 1.1em;
+}
+.splash.splash-faq .splash-faq-holder .faq-body .faq-a {
+  font-size: 0.75em;
+  text-align: left;
+}
+.splash.splash-faq .faq-close {
+  position: fixed;
+  right: 50px;
+  top: 50px;
+  width: 50px;
+  height: 50px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  transform-origin: center center;
+}
+.splash.splash-faq .faq-close:hover {
+  transform: rotate(225deg);
+}
+.splash.splash-faq .faq-close .x-line {
+  background-color: #fff;
+  width: 5px;
+  height: 100%;
+  margin: 0 22.5px;
+  position: absolute;
+}
+.splash.splash-faq .faq-close .x-hor {
+  transform: rotate(90deg);
+}
+.splash.splash-faq .faq-question {
+  margin-top: 75px;
 }
 .splash>.splash-holder {
   width: 60vw;
@@ -159,6 +205,31 @@ body.font-lato {
 }
 .splash .messages.show-message-true {
   opacity: 1;
+}
+.faq-button {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  z-index: 12;
+  font-size: 1em;
+  cursor: pointer;
+  color: rgba(248,248,248,0.6);
+  opacity: 1;
+  transition: opacity 1s;
+  font-family: 'Playfair Display', sans-serif;
+  animation: glow 2.75s infinite;
+  text-shadow: 0px 0px 0px rgba(248,248,248,0.75);
+}
+.faq-button:hover {
+  color: rgba(248,248,248,0.75);
+  text-shadow: 0px 0px 5px rgba(248,248,248,0.75);
+}
+.faq-button.faq-on-true {
+  color: #f8f8f8;
+  text-shadow: 0px 0px 8px rgba(248,248,248,0.75);
+}
+.faq-button.show-false {
+  opacity: 0;
 }
 .container {
   color: #f8f8f8;
@@ -292,5 +363,29 @@ body.font-lato {
   h2,
   h3 {
     page-break-after: avoid;
+  }
+}
+@-moz-keyframes glow {
+  50% {
+    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    color: #f8f8f8;
+  }
+}
+@-webkit-keyframes glow {
+  50% {
+    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    color: #f8f8f8;
+  }
+}
+@-o-keyframes glow {
+  50% {
+    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    color: #f8f8f8;
+  }
+}
+@keyframes glow {
+  50% {
+    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    color: #f8f8f8;
   }
 }

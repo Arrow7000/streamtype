@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#1.0.4
+#1.0.7
 
 favicon.ico
 favicon.png
@@ -8,6 +8,7 @@ css/normalize.min.css
 css/main.css
 js/angular.min.js
 js/index.js
+data/sample-text.json
 
 NETWORK:
 *
