@@ -107,6 +107,9 @@ body {
     justify-content: center;
     overflow-x: hidden;
     // overflow-y: scroll;
+    a {
+        color: alpha(textCol, 0.9);
+    }
     &.splash-on-false {
         opacity: 0;
         z-index: -10;
@@ -116,51 +119,52 @@ body {
         position: absolute;
         // padding: 0 250px;
         // font-size: 0.5em;
-        .splash-faq-holder {
-            width: 750px;
-            margin: 0 auto;
-            .faq-body {
-                font-size: 0.4em;
-                // padding-top: 10px;
-                padding-bottom: 100px;
-                .faq-q {
-                    font-size: 1.1em;
-                }
-                .faq-a {
-                    font-size: 0.75em;
-                    text-align: left;
-                }
-            }
-        }
-        .faq-close {
-            position: fixed;
-            right: 50px;
-            top: 50px;
-            // 
-            width: 50px;
-            height: 50px;
-            transform: rotate(45deg);
-            cursor pointer;
-            transition: transform .5s;
-            -webkit-transition: transform .5s;
-            transform-origin: center center;
-            &:hover {
-                transform: rotate(225deg);
-            }
-            .x-line {
-                background-color: white;
-                width: 5px;
-                height: 100%;
-                margin: 0 22.5px; // Margin should be: (container-width - child-width) / 2
-                position: absolute;
-            }
-            .x-vert {}
-            .x-hor {
-                transform: rotate(90deg);
-            }
-        }
         .faq-question {
             margin-top: 75px;
+        }
+    }
+    .splash-faq-holder {
+        width: 750px;
+        margin: 0 auto;
+        .faq-body {
+            font-size: 0.4em;
+            // padding-top: 10px;
+            padding-bottom: 100px;
+            .faq-q {
+                font-size: 1.1em;
+                margin-top: 100px;
+            }
+            .faq-a {
+                font-size: 0.75em;
+                text-align: left;
+            }
+        }
+    }
+    .faq-close {
+        position: fixed;
+        right: 50px;
+        top: 50px;
+        // 
+        width: 50px;
+        height: 50px;
+        transform: rotate(45deg);
+        cursor pointer;
+        transition: transform .5s;
+        -webkit-transition: transform .5s;
+        transform-origin: center center;
+        &:hover {
+            transform: rotate(225deg);
+        }
+        .x-line {
+            background-color: white;
+            width: 5px;
+            height: 100%;
+            margin: 0 22.5px; // Margin should be: (container-width - child-width) / 2
+            position: absolute;
+        }
+        .x-vert {}
+        .x-hor {
+            transform: rotate(90deg);
         }
     }
     &>.splash-holder {
@@ -270,7 +274,7 @@ body {
 
 @keyframes glow {
     50% {
-        text-shadow: 0px 0px 15px alpha(textCol, 0.75);
+        text-shadow: 0px 0px 25px alpha(textCol, 0.75);
         color: alpha(textCol, 1);
     }
 }

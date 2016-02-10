@@ -83,6 +83,9 @@ body.font-lato {
   justify-content: center;
   overflow-x: hidden;
 }
+.splash a {
+  color: rgba(248,248,248,0.9);
+}
 .splash.splash-on-false {
   opacity: 0;
   z-index: -10;
@@ -91,22 +94,26 @@ body.font-lato {
   display: block;
   position: absolute;
 }
-.splash.splash-faq .splash-faq-holder {
+.splash.splash-faq .faq-question {
+  margin-top: 75px;
+}
+.splash .splash-faq-holder {
   width: 750px;
   margin: 0 auto;
 }
-.splash.splash-faq .splash-faq-holder .faq-body {
+.splash .splash-faq-holder .faq-body {
   font-size: 0.4em;
   padding-bottom: 100px;
 }
-.splash.splash-faq .splash-faq-holder .faq-body .faq-q {
+.splash .splash-faq-holder .faq-body .faq-q {
   font-size: 1.1em;
+  margin-top: 100px;
 }
-.splash.splash-faq .splash-faq-holder .faq-body .faq-a {
+.splash .splash-faq-holder .faq-body .faq-a {
   font-size: 0.75em;
   text-align: left;
 }
-.splash.splash-faq .faq-close {
+.splash .faq-close {
   position: fixed;
   right: 50px;
   top: 50px;
@@ -118,21 +125,18 @@ body.font-lato {
   -webkit-transition: transform 0.5s;
   transform-origin: center center;
 }
-.splash.splash-faq .faq-close:hover {
+.splash .faq-close:hover {
   transform: rotate(225deg);
 }
-.splash.splash-faq .faq-close .x-line {
+.splash .faq-close .x-line {
   background-color: #fff;
   width: 5px;
   height: 100%;
   margin: 0 22.5px;
   position: absolute;
 }
-.splash.splash-faq .faq-close .x-hor {
+.splash .faq-close .x-hor {
   transform: rotate(90deg);
-}
-.splash.splash-faq .faq-question {
-  margin-top: 75px;
 }
 .splash>.splash-holder {
   width: 60vw;
@@ -367,25 +371,25 @@ body.font-lato {
 }
 @-moz-keyframes glow {
   50% {
-    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    text-shadow: 0px 0px 25px rgba(248,248,248,0.75);
     color: #f8f8f8;
   }
 }
 @-webkit-keyframes glow {
   50% {
-    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    text-shadow: 0px 0px 25px rgba(248,248,248,0.75);
     color: #f8f8f8;
   }
 }
 @-o-keyframes glow {
   50% {
-    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    text-shadow: 0px 0px 25px rgba(248,248,248,0.75);
     color: #f8f8f8;
   }
 }
 @keyframes glow {
   50% {
-    text-shadow: 0px 0px 15px rgba(248,248,248,0.75);
+    text-shadow: 0px 0px 25px rgba(248,248,248,0.75);
     color: #f8f8f8;
   }
 }

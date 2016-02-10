@@ -7,16 +7,16 @@
     <link rel="shortcut icon" href="/favicon.ico?v=2" />
     <link rel="shortcut icon" href="/favicon.png?v=2" />
     <title ng-if="showSplash">Stream | Keep writing</title>
-    <script src="js/angular.min.js"></script>
+    <!-- <script src="js/angular.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="js/index.js"></script>
     <title ng-if="!showSplash && timer >= 60*60*1000" ng-cloak>{{timer | date : "h:mm:ss"}} | Stream | Keep writing</title>
     <title ng-if="!showSplash && timer < 60*60*1000" ng-cloak>{{timer | date : "m:ss"}} | Stream | Keep writing</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata|Lustria|Lato|Playfair+Display:400,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 
@@ -73,19 +73,42 @@
             <div class="faq-body" ng-cloak>
                 <div class="faq-question">
                     <p class="faq-q">What is Stream?</p>
-                    <p class="faq-a">Stream is a writing app that is not for the faint of heart: if you stop writing for more than 5 seconds it will delete everything you have written. Irretrievably and irrecoverably.
+                    <p class="faq-a">Stream is a writing app that is not for the faint of heart: <em>if you stop writing for more than 5 seconds everything you have written gets utterly erased</em>.
                         <br>
-                        <br> We highly recommend that you start with 1 or 5 minute settings, to get used to how it works first. It is not recommended to start using this for longer than 5 minutes until you are familiar with the concept and are prepared to take on the risk of total deletion of all your work.
+                        <br> Irrevocably, irretrievably and irrecoverably.
+                        <br>
+                        <br> After the time you have set expires you can continue writing just as before, but the 5 second timeout will no longer affect your writing.
+                        <br>You can then copy and paste the text into any Word file, Google Doc, or any other place you would like to store your writing.
+                    </p>
+                </div>
+                <div class="faq-question">
+                    <p class="faq-q">Why does everything get deleted after 5 seconds of no typing?</p>
+                    <p class="faq-a">In order to force the writer to focus completely on the writing. With regular writing applications there are a million different distractions begging for attention, and with infinity time stretched ahead of you procrastination is virtually inevitable. This app takes away the writer's freedom to procrastinate.
+                        <br>
+                        <br>We have returned the writer to the purity of a typewriter, and refined the experience even further.
+                        <br>
+                        <br>It is a drastic tool for people who finally want to get their writing done, regardless of how much willpower they thought they had.
                     </p>
                 </div>
                 <div class="faq-question">
                     <p class="faq-q">I've just had three hours' worth of work deleted! Can I get it back?</p>
-                    <p class="faq-a">Unfortunately not. The 5 second timeout is a double edged sword. In order to focus the writer's mind completely, the risk has to be all-encompassing. This means that there is no way of recovering what has been deleted.
+                    <p class="faq-a">Unfortunately not. The 5 second timeout is a double edged sword&mdash;ands she cuts deep. In order to focus the writer's mind completely, the threat of erasure has to be complete. This is the only way to ensure total focus; and it does unfortunately mean that there is no way of recovering what has been deleted.
+                    </p>
+                </div>
+                <div class="faq-question">
+                    <p class="faq-q">Where do I start?</p>
+                    <p class="faq-a">
+                        Close this screen by clicking on the X in the top right corner to get back to the main screen.
+                        <br>From there you can select the duration you want to be writing for, as well as the typeface you would like to write in. Once you are ready click the button labeled "Click here to start typing for x minutes." This will start the app.
                     </p>
                 </div>
                 <div class="faq-question">
                     <p class="faq-q">Sounds terrifying but I'll give it a go!</p>
-                    <p class="faq-a">Great! We recommend you start with 1 minute - or 5 minutes max - session. This allows you to get a feel for the typing rhythym you should be aiming for, without risking too much.
+                    <p class="faq-a">Great! We recommend you start with a 1 minute session&mdash;or 5 minutes at most. This allows you to get a feel for the typing rhythym you should be aiming for, without risking too much.
+                        <br>
+                        <br> Happy writing!
+                        <br>
+                        <br>PS if you enjoy using the app or have any suggestions to make please let us know either way on <a href="mailto:aron@smartowldesign.com" target="_blank">aron@smartowldesign.com</a>
                     </p>
                 </div>
             </div>

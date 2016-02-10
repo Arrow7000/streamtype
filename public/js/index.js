@@ -17,7 +17,7 @@
             timeHover: "Select how many minutes you want to write for",
             fontHover: "Select which font you'd like to write in",
             enterButton: "Click to begin. There is no turning back.",
-            helpButton: "We strongly recommend you read this before using Stream"
+            helpButton: "It is strongly recommend you read this before using Stream"
         }
         $scope.message = $scope.messages.default;
 
