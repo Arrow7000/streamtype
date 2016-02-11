@@ -221,7 +221,14 @@ body.font-lato {
   position: fixed;
   left: 50px;
   bottom: 50px;
-  font-size: 0.25em;
+  font-size: 0.5em;
+  color: rgba(248,248,248,0.75);
+}
+.splash .links-bar a {
+  margin-right: 10px;
+}
+.splash .links-bar a:hover {
+  color: #f8f8f8;
 }
 .faq-button {
   position: fixed;

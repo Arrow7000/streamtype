@@ -256,7 +256,14 @@ body {
         position: fixed;
         left: 50px;
         bottom: 50px;
-        font-size: 0.25em;
+        font-size: 0.5em;
+        color: alpha(textCol, 0.75);
+        a {
+            margin-right: 10px;
+            &:hover {
+                color: textCol;
+            }
+        }
     }
 }
 
