@@ -153,7 +153,13 @@ body {
         -webkit-transition: transform .5s;
         transform-origin: center center;
         &:hover {
-            transform: rotate(225deg);
+            // transform: rotate(225deg);
+            .x-hor {
+                transform: rotate(0deg);
+            }
+            .x-vert {
+                transform: rotate(90deg);
+            }
         }
         .x-line {
             background-color: white;
@@ -162,8 +168,11 @@ body {
             margin: 0 22.5px; // Margin should be: (container-width - child-width) / 2
             position: absolute;
         }
-        .x-vert {}
+        .x-vert {
+            transition: transform .5s;
+        }
         .x-hor {
+            transition: transform .5s;
             transform: rotate(90deg);
         }
     }
@@ -242,6 +251,12 @@ body {
         &.show-message-true {
             opacity: 1;
         }
+    }
+    .links-bar {
+        position: fixed;
+        left: 50px;
+        bottom: 50px;
+        font-size: 0.25em;
     }
 }
 

@@ -59,12 +59,16 @@
                 <span ng-if="enterTimerStarted">Starting in...</span>
                 </span>
             </div>
-            <!-- FAQ screen -->
         </div>
         <div class="messages show-message-{{durChoosing || fontChoosing || defaultHover}}" ng-cloak>
             {{message}}
         </div>
+        <div class="links-bar">
+            <a href="https://github.com/Arrow7000" target="_blank"><i class="fa fa-github"></i></a>
+            <a href="mailto:a.adler@amaze.com?subject=Stream"><i class="fa fa-envelope"></i></a>
+        </div>
     </div>
+    <!-- FAQ screen -->
     <div class="splash splash-faq" ng-show="showFAQ" ng-cloak>
         <div class="splash-faq-holder">
             <p class="title">

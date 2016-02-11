@@ -125,8 +125,11 @@ body.font-lato {
   -webkit-transition: transform 0.5s;
   transform-origin: center center;
 }
-.splash .faq-close:hover {
-  transform: rotate(225deg);
+.splash .faq-close:hover .x-hor {
+  transform: rotate(0deg);
+}
+.splash .faq-close:hover .x-vert {
+  transform: rotate(90deg);
 }
 .splash .faq-close .x-line {
   background-color: #fff;
@@ -135,7 +138,11 @@ body.font-lato {
   margin: 0 22.5px;
   position: absolute;
 }
+.splash .faq-close .x-vert {
+  transition: transform 0.5s;
+}
 .splash .faq-close .x-hor {
+  transition: transform 0.5s;
   transform: rotate(90deg);
 }
 .splash>.splash-holder {
@@ -209,6 +216,12 @@ body.font-lato {
 }
 .splash .messages.show-message-true {
   opacity: 1;
+}
+.splash .links-bar {
+  position: fixed;
+  left: 50px;
+  bottom: 50px;
+  font-size: 0.25em;
 }
 .faq-button {
   position: fixed;
