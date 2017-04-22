@@ -1,20 +1,16 @@
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
+const express = require('express');
+const compression = require('compression')
 
-// Sets the static file folders
-app.use("/", express.static(__dirname + "/public"));
+const app = express();
+app.use(compression());
 
-// set port
-var port = (process.env.PORT || 9000);
-server.listen(port, function() {
-	console.log('Server now running...');
+app.use('/public', express.static(__dirname + '/public'));
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/app/index.html');
 });
 
 
-// All other paths result in 404
-app.get('*', function(req, res) {
-	res.status(404).end();
-	// .sendFile(__dirname + '/404.html');
-});
-
+const port = process.env.PORT || 3000;
+console.log('Running app on port', port);
+app.listen(port);
