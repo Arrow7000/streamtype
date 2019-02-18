@@ -4,6 +4,7 @@
   "description": "An app for focused writing. If you stop writing for longer than 5 seconds everything you have written disappears irretrievably. Use with caution.",
   "main": "app.js",
   "scripts": {
+    "start": "parcel src/index.html --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/Arrow7000/Stream#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "@types/react": "^16.8.3",
+    "@types/react-dom": "^16.8.2",
+    "parcel-bundler": "^1.11.0",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.3.3"
   }
 }
