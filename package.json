@@ -20,9 +20,13 @@
   "dependencies": {
     "@types/react": "^16.8.3",
     "@types/react-dom": "^16.8.2",
+    "@types/react-router": "^4.4.4",
+    "@types/react-router-dom": "^4.3.1",
     "parcel-bundler": "^1.11.0",
     "react": "^16.8.2",
-    "react-dom": "^16.8.2"
+    "react-dom": "^16.8.2",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "typescript": "^3.3.3"
