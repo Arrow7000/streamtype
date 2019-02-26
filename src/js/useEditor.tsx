@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useTimer from "./useTimer";
+import useInterval from "./useInterval";
 
 export interface EditorProps {
     text: string;
@@ -14,7 +14,7 @@ export default function useEditor(totalTimeUntilDeletion: number) {
 
     const tickRate = (1000 / 60) * 2;
 
-    useTimer(() => {
+    useInterval(() => {
         setTimeLeft(state => {
             if (text !== "") {
                 return state - tickRate > 0 ? state - tickRate : 0;

@@ -7,9 +7,6 @@ export default function Editor({
     timeLeft,
     totalTimeUntilDeletion
 }: EditorProps) {
-    // const msUntilDeletion = 5000;
-    // const { text, changeText, timeLeft } = useEditor(msUntilDeletion);
-
     if (timeLeft === 0) {
         changeText("");
         console.log("All text deleted");
