@@ -9,5 +9,5 @@ export default function useInterval(callback: () => void, ms: number) {
         const tick = () => savedCallback.current();
         const intvlId = setInterval(tick, ms);
         return () => clearInterval(intvlId);
-    }, []);
+    }, [ms]);
 }

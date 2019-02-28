@@ -24,10 +24,10 @@ export default function useEditor(totalTimeUntilDeletion: number) {
         });
     }, tickRate);
 
-    const changeText = (newText: string) => {
-        updateText(newText);
+    function changeText(textOrUpdater: ((oldText: string) => string) | string) {
+        updateText(textOrUpdater);
         setTimeLeft(totalTimeUntilDeletion);
-    };
+    }
 
     return {
         text,
