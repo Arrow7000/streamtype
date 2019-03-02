@@ -13,6 +13,7 @@ import useInterval from "./useInterval";
 
 import bibleVerses from "./bibleVerses";
 import { Home } from "./Home";
+import useTimeout from "./useTimeout";
 
 interface CustomRouteComponentProps {
     path: string;
@@ -24,14 +25,22 @@ const EditorView = ({
 }: RouteComponentProps & CustomRouteComponentProps) => {
     // const [currentCharIndex, setCurrentCharIndex] = useState(0);
 
-    const msUntilDeletion = 15000; // change before committing
+    const [sessionTimeLeft, setSessionTimeLeft] = useState(10 * 1000);
+    const [stopped, setStopped] = useState(false);
+
+    const msUntilDeletion = 5000; // change before committing
 
     const isWriteRoute = location.pathname === path;
 
-    const editorProps = useEditor(msUntilDeletion);
+    const editorProps = useEditor(isWriteRoute && !stopped, msUntilDeletion);
     const { changeText, text } = editorProps;
 
-    const allVerses = bibleVerses.join("\n\n") + "\n\n";
+    // const allVerses = bibleVerses.join("\n\n") + "\n\n";
+
+    useTimeout(() => {
+        console.log("Session finished!");
+        setStopped(true);
+    }, sessionTimeLeft);
 
     useInterval(() => {
         // if (
@@ -47,7 +56,7 @@ const EditorView = ({
         }
     }, 100);
 
-    return <Editor {...editorProps} />;
+    return <Editor {...editorProps} isInView={isWriteRoute} />;
 };
 
 const EditorViewWithRouter = withRouter(EditorView);
@@ -57,6 +66,25 @@ const AppStyled = styled.div`
     grid-template-columns: [main-col] 1fr;
     grid-template-rows: [main-row] 100vh;
 `;
+
+/**
+ * # App states
+ *
+ * On Homepage:
+ *  Sample text gets typed in background. Fades when stopped.
+ *
+ * On Editor:
+ *  If text is empty:
+ *      Do not count down session time remaining
+ *      Do not count down 5s until deletion
+ *  If text not empty:
+ *      While session time remaining > 0:
+ *          If no typing: count down 5s and delete all
+ *          If typing: reset timer to 5s
+ *      When session time remaining == 0:
+ *          Export buttons pop up
+ *          No countdown of session or 5s happening
+ */
 
 export default function App() {
     return (

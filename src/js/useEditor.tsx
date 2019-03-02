@@ -4,35 +4,50 @@ import useInterval from "./useInterval";
 export interface EditorProps {
     text: string;
     changeText: (text: string) => void;
-    timeLeft: number;
-    totalTimeUntilDeletion: number;
+    timeLeftUntilDelete: number;
+    timeUntilDeletion: number;
 }
 
-export default function useEditor(totalTimeUntilDeletion: number) {
+// @TODO: add timer for cancelling Stream mode and export menu can appear
+export default function useEditor(
+    countdownActive: boolean,
+    timeUntilDeletion: number
+) {
     const [text, updateText] = useState("");
-    const [timeLeft, setTimeLeft] = useState(totalTimeUntilDeletion);
+    const [timerExpired, setTimerExpired] = useState(false);
+    const [timeLeftUntilDelete, setTimeLeftUntilDelete] = useState(
+        timeUntilDeletion
+    );
 
     const tickRate = (1000 / 60) * 2;
+    // const tickRate = 10000000;
 
     useInterval(() => {
-        setTimeLeft(state => {
-            if (text !== "") {
-                return state - tickRate > 0 ? state - tickRate : 0;
-            } else {
-                return state;
-            }
-        });
+        if (countdownActive && !timerExpired) {
+            setTimeLeftUntilDelete(timeLeft => {
+                if (text !== "") {
+                    return timeLeft - tickRate > 0 ? timeLeft - tickRate : 0;
+                } else {
+                    return timeLeft;
+                }
+            });
+        }
     }, tickRate);
 
     function changeText(textOrUpdater: ((oldText: string) => string) | string) {
         updateText(textOrUpdater);
-        setTimeLeft(totalTimeUntilDeletion);
+        setTimeLeftUntilDelete(timeUntilDeletion);
+    }
+
+    if (timeLeftUntilDelete === 0) {
+        changeText("");
+        console.log("All text deleted");
     }
 
     return {
         text,
         changeText,
-        timeLeft,
-        totalTimeUntilDeletion
+        timeLeftUntilDelete,
+        timeUntilDeletion
     };
 }

@@ -1,4 +1,11 @@
-$fonts: "Roboto Mono", Consolas, sans-serif;
+@font-face {
+    font-family: "Courier Prime Sans";
+    src: url("../fonts/Courier Prime Sans.ttf");
+}
+
+@import url("https://fonts.googleapis.com/css?family=Bitter");
+
+$fonts: "Bitter", "Courier Prime Sans", sans-serif;
 
 html,
 body {
