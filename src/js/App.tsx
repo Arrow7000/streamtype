@@ -15,6 +15,8 @@ import bibleVerses from "./bibleVerses";
 import { Home } from "./Home";
 import useTimeout from "./useTimeout";
 
+const bottomButtonRowHeight = 50;
+
 interface CustomRouteComponentProps {
     path: string;
 }
@@ -64,7 +66,8 @@ const EditorViewWithRouter = withRouter(EditorView);
 const AppStyled = styled.div`
     display: grid;
     grid-template-columns: [main-col] 1fr;
-    grid-template-rows: [main-row] 100vh;
+    grid-template-rows: [main-row] 1fr [button-row-split] ${bottomButtonRowHeight}px [button-menu];
+    height: 100vh;
 `;
 
 /**

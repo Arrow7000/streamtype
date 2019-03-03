@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { lighten, transparentize } from "polished";
 
 import { EditorProps } from "./useEditor";
@@ -7,10 +7,12 @@ import * as theme from "./Theme";
 
 interface TextAreaProps {
     textOpacity: number;
+    isInView: boolean;
 }
 
-const editorPadding = 15;
-const editorWidth = 500;
+// Constants
+const editorPadding = 15; // for mobile
+const editorWidth = 500; // for desktop
 
 const StyledTextarea = styled.textarea.attrs(
     ({ textOpacity }: TextAreaProps) => ({
@@ -23,12 +25,14 @@ const StyledTextarea = styled.textarea.attrs(
     font-family: "Operator Mono", "Consolas", sans-serif;
     box-sizing: border-box;
     border: 0;
-    grid-row: main-row;
+    grid-row: ${({ isInView }) =>
+        isInView ? "main-row" : "main-row / button-menu"};
     grid-column: main-col;
     z-index: 0;
     caret-color: ${theme.caret};
     background-color: ${theme.bg};
     padding: ${editorPadding}px;
+
     font-size: 1.2rem;
     line-height: 1.5;
     font-family: "Courier Prime Sans";
@@ -38,12 +42,8 @@ const StyledTextarea = styled.textarea.attrs(
 `;
 
 const ExportMenu = styled.div`
-    height: 50px;
-    width: 100%;
+    grid-area: button-row-split / main-col / button-menu;
     background-color: ${theme.buttonBg};
-    grid-area: main-row / main-col;
-    z-index: 2;
-    align-self: end;
 `;
 
 interface EditorComponentProps extends EditorProps {
@@ -65,8 +65,9 @@ export default function Editor({
                 onChange={e => changeText(e.target.value)}
                 value={text}
                 textOpacity={timeLeftUntilDelete / timeUntilDeletion}
+                isInView={isInView}
             />
-            {isInView && <ExportMenu />}
+            {isInView && <ExportMenu>Test button</ExportMenu>}
         </>
     );
 }
