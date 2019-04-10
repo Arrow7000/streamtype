@@ -4,26 +4,40 @@ import useInterval from "./useInterval";
 export interface EditorProps {
     text: string;
     changeText: (text: string) => void;
+    restartSession: () => void;
     timeLeftUntilDelete: number;
-    timeUntilDeletion: number;
+    totalTimeUntilDeletion: number;
+    sessionLengthRemaining: number;
 }
 
-// @TODO: add timer for cancelling Stream mode and export menu can appear
 export default function useEditor(
-    countdownActive: boolean,
-    timeUntilDeletion: number
-) {
+    sessionLength: number,
+    totalTimeUntilDeletion: number
+): EditorProps {
     const [text, updateText] = useState("");
-    const [timerExpired, setTimerExpired] = useState(false);
+
+    const [sessionRemaining, setSessionRemaining] = useState(sessionLength);
+
+    const restartSession = () => setSessionRemaining(sessionLength);
+
     const [timeLeftUntilDelete, setTimeLeftUntilDelete] = useState(
-        timeUntilDeletion
+        totalTimeUntilDeletion
     );
 
     const tickRate = (1000 / 60) * 2;
-    // const tickRate = 10000000;
+
+    const sessionExpired = sessionRemaining <= 0;
 
     useInterval(() => {
-        if (countdownActive && !timerExpired) {
+        if (!sessionExpired) {
+            setSessionRemaining(sessRem => {
+                if (text !== "") {
+                    return sessRem - tickRate > 0 ? sessRem - tickRate : 0;
+                } else {
+                    return sessRem;
+                }
+            });
+
             setTimeLeftUntilDelete(timeLeft => {
                 if (text !== "") {
                     return timeLeft - tickRate > 0 ? timeLeft - tickRate : 0;
@@ -36,18 +50,23 @@ export default function useEditor(
 
     function changeText(textOrUpdater: ((oldText: string) => string) | string) {
         updateText(textOrUpdater);
-        setTimeLeftUntilDelete(timeUntilDeletion);
+        setTimeLeftUntilDelete(totalTimeUntilDeletion);
     }
 
-    if (timeLeftUntilDelete === 0) {
+    if (sessionExpired) {
+        console.log("Session finished!");
+    } else if (timeLeftUntilDelete <= 0) {
         changeText("");
+        setSessionRemaining(sessionLength);
         console.log("All text deleted");
     }
 
     return {
         text,
         changeText,
+        restartSession,
         timeLeftUntilDelete,
-        timeUntilDeletion
+        totalTimeUntilDeletion,
+        sessionLengthRemaining: sessionRemaining
     };
 }
