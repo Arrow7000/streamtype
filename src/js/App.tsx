@@ -87,6 +87,25 @@ const AppStyled = styled.div`
  *      When session time remaining == 0:
  *          Export buttons pop up
  *          No countdown of session or 5s happening
+ *
+ *
+ *
+ * First version
+ *
+ * On Homepage:
+ *  Timer is not counting down
+ *
+ * On Editor:
+ *  If text is empty:
+ *      Do not count down session time remaining
+ *      Do not count down 5s to deletion
+ *  If text not empty:
+ *      While session time remaining > 0:
+ *          If no typing: count down 5s and delete all
+ *          If typing: reset timer to 5s
+ *      When session time remaining == 0:
+ *          Export buttons pop up
+ *          No countdown of session or 5s happening
  */
 
 export default function App() {
