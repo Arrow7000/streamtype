@@ -169,12 +169,12 @@ export default function Editor({
                     <MenuButton onClick={() => download("download.md", text)}>
                         Export as .md
                     </MenuButton>
-                    <a
+                    {/* <a
                         href={`data:application/xml;charset=utf-8,${text}`}
                         download="stream-download.txt"
                     >
                         Save
-                    </a>
+                    </a> */}
                 </ExportMenu>
             )}
         </StyledEditor>
