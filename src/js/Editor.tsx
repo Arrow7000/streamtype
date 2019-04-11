@@ -100,6 +100,7 @@ const MenuButton = styled.button`
     font-weight: normal;
     box-shadow: 0 1px 5px ${transparentize(0.5, "black")};
     text-decoration: none;
+    margin: 0 10px;
     &:hover {
         background-color: ${darken(0.01, theme.buttonBg)};
     }
@@ -162,30 +163,12 @@ export default function Editor({
             />
             {!sessionOngoing && (
                 <ExportMenu>
-                    {/* <MenuButton>Save to Drive</MenuButton> */}
                     <MenuButton onClick={() => download("download.txt", text)}>
                         Export as .txt
                     </MenuButton>
                     <MenuButton onClick={() => download("download.md", text)}>
                         Export as .md
                     </MenuButton>
-                    {/* <a
-                        href={`data:application/xml;charset=utf-8,${text}`}
-                        download="stream-download.txt"
-                    >
-                        Save
-                    </a> */}
-                    <div
-                        className="g-savetodrive"
-                        // data-src={`data:application/xml;charset=utf-8,${text}`}
-                        data-src={`/.netlify/functions/download?file=${encodeURIComponent(
-                            text
-                        )}`}
-                        data-filename="stream.txt"
-                        data-sitename="Stream"
-                    >
-                        Save to drive
-                    </div>
                 </ExportMenu>
             )}
         </StyledEditor>
@@ -197,9 +180,7 @@ export const ConnectedEditor = ({
 }: {
     totalTimeUntilDeletion: number;
 }) => {
-    const sessLen = 60 * 0.05 * 1000;
-
+    const sessLen = 5 * 60 * 1000;
     const editor = useEditor(sessLen, totalTimeUntilDeletion);
-
     return <Editor {...editor} />;
 };
