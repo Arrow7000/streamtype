@@ -162,7 +162,7 @@ export default function Editor({
             />
             {!sessionOngoing && (
                 <ExportMenu>
-                    <MenuButton>Save to Drive</MenuButton>
+                    {/* <MenuButton>Save to Drive</MenuButton> */}
                     <MenuButton onClick={() => download("download.txt", text)}>
                         Export as .txt
                     </MenuButton>
@@ -175,6 +175,17 @@ export default function Editor({
                     >
                         Save
                     </a> */}
+                    <div
+                        className="g-savetodrive"
+                        // data-src={`data:application/xml;charset=utf-8,${text}`}
+                        data-src={`/.netlify/functions/download?file=${encodeURIComponent(
+                            text
+                        )}`}
+                        data-filename="stream.txt"
+                        data-sitename="Stream"
+                    >
+                        Save to drive
+                    </div>
                 </ExportMenu>
             )}
         </StyledEditor>
