@@ -6,5 +6,5 @@ exports.handler = function(event, context, callback) {
         body: file
     };
 
-    callback(response);
+    callback(null, response);
 };
