@@ -5,6 +5,7 @@ import { transparentize, darken } from "polished";
 import useEditor, { EditorProps } from "./useEditor";
 import * as theme from "./Theme";
 import LinkButton from "./LinkButton";
+import downloadFile from "./downloadFile";
 
 interface TextAreaProps {
     textOpacity: number;
@@ -113,20 +114,7 @@ interface EditorComponentProps extends EditorProps {
     sessionLengthRemaining: number;
 }
 
-function download(filename: string, text: string) {
-    const element = document.createElement("a");
-    element.setAttribute(
-        "href",
-        "data:text/plain;charset=utf-8," + encodeURIComponent(text)
-    );
-    element.setAttribute("download", filename);
-    element.style.display = "none";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-}
-
-export default function Editor({
+export function Editor({
     text,
     changeText,
     sessionLengthRemaining,
@@ -172,10 +160,12 @@ export default function Editor({
             />
             {!sessionOngoing && (
                 <ExportMenu>
-                    <MenuButton onClick={() => download("download.txt", text)}>
+                    <MenuButton
+                        onClick={() => downloadFile("stream.txt", text)}
+                    >
                         Export as .txt
                     </MenuButton>
-                    <MenuButton onClick={() => download("download.md", text)}>
+                    <MenuButton onClick={() => downloadFile("stream.md", text)}>
                         Export as .md
                     </MenuButton>
                 </ExportMenu>
@@ -184,12 +174,13 @@ export default function Editor({
     );
 }
 
-export const ConnectedEditor = ({
-    totalTimeUntilDeletion
+export default function ConnectedEditor({
+    totalTimeUntilDeletion,
+    sessionLength
 }: {
     totalTimeUntilDeletion: number;
-}) => {
-    const sessLen = 5 * 60 * 1000;
-    const editor = useEditor(sessLen, totalTimeUntilDeletion);
+    sessionLength: number;
+}) {
+    const editor = useEditor(sessionLength, totalTimeUntilDeletion);
     return <Editor {...editor} />;
-};
+}

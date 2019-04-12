@@ -16,7 +16,9 @@ export default function useEditor(
 ): EditorProps {
     const [text, updateText] = useState("");
 
-    const [sessionRemaining, setSessionRemaining] = useState(sessionLength);
+    const [sessionRemaining, setSessionRemaining] = useState(
+        sessionLength * 60 * 1000
+    );
 
     const restartSession = () => setSessionRemaining(sessionLength);
 

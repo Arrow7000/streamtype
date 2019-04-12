@@ -7,6 +7,7 @@ const LinkButton = ({
     warn,
     warnMessage,
     title,
+    onClick,
     staticContext, // throws an error if passed to button as part of ...rest
     match, // not needed in <a/> element
     location, // not needed in <a/> element
@@ -16,6 +17,7 @@ const LinkButton = ({
     warn?: boolean;
     warnMessage?: string;
     title?: string;
+    onClick?: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 }) => {
     return (
         <a
@@ -24,6 +26,10 @@ const LinkButton = ({
             href={to}
             onClick={e => {
                 e.preventDefault();
+
+                if (onClick) {
+                    onClick(e);
+                }
 
                 const goToLink = () => history.push(to);
 

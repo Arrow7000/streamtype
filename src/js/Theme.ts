@@ -17,6 +17,7 @@ export const buttonBg = selection;
 export const buttonPrimary = red;
 
 export const headerText = purple;
+export const subHeaderText = comment;
 
 export const editorText = orange;
 export const caret = purple;

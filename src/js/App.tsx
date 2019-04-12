@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -7,17 +7,22 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 
-import { ConnectedEditor } from "./Editor";
+import Editor from "./Editor";
 import { Home } from "./Home";
 
 interface CustomRouteComponentProps {
     path: string;
 }
 
+interface AppEditorProps {
+    sessionLength: number;
+}
+
 const EditorView = ({
     location,
-    path
-}: RouteComponentProps & CustomRouteComponentProps) => {
+    path,
+    sessionLength
+}: RouteComponentProps & CustomRouteComponentProps & AppEditorProps) => {
     const isWriteRoute = location.pathname === path;
 
     const msUntilDeletion = 5000; // change before committing
@@ -26,7 +31,12 @@ const EditorView = ({
         return null;
     }
 
-    return <ConnectedEditor totalTimeUntilDeletion={msUntilDeletion} />;
+    return (
+        <Editor
+            totalTimeUntilDeletion={msUntilDeletion}
+            sessionLength={sessionLength}
+        />
+    );
 };
 
 const EditorViewWithRouter = withRouter(EditorView);
@@ -57,11 +67,21 @@ const AppStyled = styled.div`
  */
 
 export default function App() {
+    const defaultSessionLen = 5;
+    const [sessionLen, setSessionLen] = useState(defaultSessionLen);
+
     return (
         <Router>
             <AppStyled>
-                <Route exact path="/" component={Home} />
-                <EditorViewWithRouter path="/write" />
+                <Route
+                    exact
+                    path="/"
+                    component={() => <Home setSessionLength={setSessionLen} />}
+                />
+                <EditorViewWithRouter
+                    path="/write"
+                    sessionLength={sessionLen}
+                />
             </AppStyled>
         </Router>
     );

@@ -29,6 +29,13 @@ const Header = styled.h1`
     font-weight: normal;
 `;
 
+const SubHeader = styled.h2`
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: ${theme.subHeaderText};
+    font-weight: normal;
+`;
+
 const Button = styled(LinkButton)`
     border: none;
     background-color: ${theme.buttonBg};
@@ -36,6 +43,7 @@ const Button = styled(LinkButton)`
     cursor: pointer;
     font-size: 1.2rem;
     padding: 0.8rem;
+    margin: 0.4rem;
     font-weight: normal;
     box-shadow: 0 1px 5px ${transparentize(0.5, "black")};
     text-decoration: none;
@@ -47,12 +55,33 @@ const Button = styled(LinkButton)`
     }
 `;
 
-export function Home() {
+const ButtonRow = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+interface HomeProps {
+    setSessionLength: (len: number) => void;
+}
+
+export function Home({ setSessionLength }: HomeProps) {
     return (
         <HomeStyled>
             <MainSection>
                 <Header>Welcome to Stream.</Header>
-                <Button to="/write">Go to editor</Button>
+                <SubHeader>Select your session duration</SubHeader>
+                <ButtonRow>
+                    {[1, 5, 10, 30, 60, 120].map(length => (
+                        <Button
+                            to="/write"
+                            onClick={() => setSessionLength(length)}
+                            key={length}
+                        >
+                            {length}m
+                        </Button>
+                    ))}
+                </ButtonRow>
             </MainSection>
         </HomeStyled>
     );
