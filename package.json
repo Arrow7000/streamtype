@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel src/index.html --open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html && cp _redirects dist"
   },
   "repository": {
     "type": "git",
