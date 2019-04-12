@@ -149,7 +149,16 @@ export default function Editor({
     return (
         <StyledEditor>
             <TopBar>
-                <BackButton to="/">⬅</BackButton>
+                <BackButton
+                    to="/"
+                    warn={text !== ""}
+                    warnMessage={
+                        "Navigating back to the home screen will lose your progress.\r\n\r\nDo you want to proceed?"
+                    }
+                    title="Go back to home"
+                >
+                    ⬅
+                </BackButton>
                 <div>{sessionOngoing ? timerText : "Session ✅"}</div>
             </TopBar>
             <StyledTextarea
