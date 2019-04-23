@@ -14,13 +14,13 @@ export default function useEditor(
     sessionLength: number,
     totalTimeUntilDeletion: number
 ): EditorProps {
+    const sessionLengthInMs = sessionLength * 60 * 1000;
+
     const [text, updateText] = useState("");
 
-    const [sessionRemaining, setSessionRemaining] = useState(
-        sessionLength * 60 * 1000
-    );
+    const [sessionRemaining, setSessionRemaining] = useState(sessionLengthInMs);
 
-    const restartSession = () => setSessionRemaining(sessionLength);
+    const restartSession = () => setSessionRemaining(sessionLengthInMs);
 
     const [timeLeftUntilDelete, setTimeLeftUntilDelete] = useState(
         totalTimeUntilDeletion
