@@ -60,7 +60,6 @@ const TopBar = styled.div`
     background-color: ${theme.bg};
     color: ${theme.headerText};
     font-size: 1.2rem;
-    font-weight: normal;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -74,7 +73,6 @@ const BackButton = styled(LinkButton)`
     background-color: ${theme.bg};
     color: ${theme.headerText};
     font-size: 1.2rem;
-    font-weight: normal;
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -98,7 +96,7 @@ const MenuButton = styled.button`
     cursor: pointer;
     font-size: 1rem;
     padding: 0.4rem;
-    font-weight: normal;
+    font-weight: 300;
     box-shadow: 0 1px 5px ${transparentize(0.5, "black")};
     text-decoration: none;
     margin: 0 10px;
@@ -174,13 +172,15 @@ export function Editor({
     );
 }
 
+interface ConnectedEditorProps {
+    totalTimeUntilDeletion: number;
+    sessionLength: number;
+}
+
 export default function ConnectedEditor({
     totalTimeUntilDeletion,
     sessionLength
-}: {
-    totalTimeUntilDeletion: number;
-    sessionLength: number;
-}) {
+}: ConnectedEditorProps) {
     const editor = useEditor(sessionLength, totalTimeUntilDeletion);
     return <Editor {...editor} />;
 }

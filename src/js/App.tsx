@@ -1,40 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     BrowserRouter as Router,
     Route,
     withRouter,
-    RouteComponentProps
+    RouteComponentProps,
+    Redirect
 } from "react-router-dom";
 import styled from "styled-components";
 
 import Editor from "./Editor";
 import { Home } from "./Home";
+import { FAQs } from "./FAQs";
+import { timeParam } from "./config";
 
 interface CustomRouteComponentProps {
     path: string;
 }
 
-interface AppEditorProps {
-    sessionLength: number;
-}
-
 const EditorView = ({
     location,
-    path,
-    sessionLength
-}: RouteComponentProps & CustomRouteComponentProps & AppEditorProps) => {
+    path
+}: RouteComponentProps & CustomRouteComponentProps) => {
     const isWriteRoute = location.pathname === path;
 
     const msUntilDeletion = 5000; // change before committing
+    const duration = new URLSearchParams(location.search).get(timeParam);
 
     if (!isWriteRoute) {
         return null;
     }
 
+    if (!duration) {
+        return <Redirect to="/" />;
+    }
+
     return (
         <Editor
             totalTimeUntilDeletion={msUntilDeletion}
-            sessionLength={sessionLength}
+            sessionLength={+duration / 60}
         />
     );
 };
@@ -67,21 +70,12 @@ const AppStyled = styled.div`
  */
 
 export default function App() {
-    const defaultSessionLen = 5;
-    const [sessionLen, setSessionLen] = useState(defaultSessionLen);
-
     return (
         <Router>
             <AppStyled>
-                <Route
-                    exact
-                    path="/"
-                    component={() => <Home setSessionLength={setSessionLen} />}
-                />
-                <EditorViewWithRouter
-                    path="/write"
-                    sessionLength={sessionLen}
-                />
+                <Route exact path="/" component={Home} />
+                <Route path="/faq" component={FAQs} />
+                <EditorViewWithRouter path="/write" />
             </AppStyled>
         </Router>
     );

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { transparentize, darken } from "polished";
 import LinkButton from "./LinkButton";
 import * as theme from "./Theme";
+import { timeParam } from "./config";
 
 const HomeStyled = styled.div`
     height: 100vh;
@@ -61,11 +62,7 @@ const ButtonRow = styled.div`
     justify-content: center;
 `;
 
-interface HomeProps {
-    setSessionLength: (len: number) => void;
-}
-
-export function Home({ setSessionLength }: HomeProps) {
+export function Home() {
     return (
         <HomeStyled>
             <MainSection>
@@ -74,8 +71,7 @@ export function Home({ setSessionLength }: HomeProps) {
                 <ButtonRow>
                     {[1, 5, 10, 30, 60, 120].map(length => (
                         <Button
-                            to="/write"
-                            onClick={() => setSessionLength(length)}
+                            to={`/write?${timeParam}=${length * 60}`}
                             key={length}
                         >
                             {length}m
