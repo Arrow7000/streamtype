@@ -13,7 +13,7 @@ const HomeStyled = styled.div`
     display: grid;
     grid-template-columns: [home-main-col] 1fr;
     grid-template-rows: 1fr [home-main-row] 1fr 1fr;
-    @media screen and (min-width: 500px) {
+    @media screen and (min-width: ${500 + 2 * 50}px) {
         grid-template-columns: 1fr [home-main-col] 500px 1fr;
     }
 `;
@@ -62,6 +62,13 @@ const ButtonRow = styled.div`
     justify-content: center;
 `;
 
+const FAQLink = styled.a`
+    font-size: 1.2rem;
+    color: ${theme.subHeaderText};
+    display: inline-block;
+    padding-top: 25px;
+`;
+
 export function Home() {
     return (
         <HomeStyled>
@@ -78,6 +85,7 @@ export function Home() {
                         </Button>
                     ))}
                 </ButtonRow>
+                <FAQLink href="/faqs">FAQs</FAQLink>
             </MainSection>
         </HomeStyled>
     );

@@ -45,7 +45,7 @@ const EditorView = ({
 const EditorViewWithRouter = withRouter(EditorView);
 
 const AppStyled = styled.div`
-    height: 100vh;
+    min-height: 100vh;
 `;
 
 /**
@@ -74,7 +74,7 @@ export default function App() {
         <Router>
             <AppStyled>
                 <Route exact path="/" component={Home} />
-                <Route path="/faq" component={FAQs} />
+                <Route path="/faqs" component={FAQs} />
                 <EditorViewWithRouter path="/write" />
             </AppStyled>
         </Router>
