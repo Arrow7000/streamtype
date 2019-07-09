@@ -45,9 +45,9 @@ export function FAQs() {
         <FAQStyled>
             <FAQContent>
                 <h1>FAQs</h1>
-                <h2>What is Stream?</h2>
+                <h2>What is StreamType?</h2>
                 <p>
-                    Stream is a writing app that is not for the faint of heart:
+                    StreamType is a writing app that is not for the faint of heart:
                     if you stop writing for more than 5 seconds everything you
                     have written gets utterly erased.
                 </p>

@@ -73,7 +73,7 @@ export function Home() {
     return (
         <HomeStyled>
             <MainSection>
-                <Header>Welcome to Stream.</Header>
+                <Header>Welcome to StreamType.</Header>
                 <SubHeader>Select your session duration</SubHeader>
                 <ButtonRow>
                     {[1, 5, 10, 30, 60, 120].map(length => (
