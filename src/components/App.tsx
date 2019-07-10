@@ -1,10 +1,10 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
-    Route,
-    withRouter,
-    RouteComponentProps,
-    Redirect
+  BrowserRouter as Router,
+  Route,
+  withRouter,
+  RouteComponentProps,
+  Redirect
 } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,38 +14,38 @@ import { FAQs } from "./FAQs";
 import { timeParam } from "./config";
 
 interface CustomRouteComponentProps {
-    path: string;
+  path: string;
 }
 
 const EditorView = ({
-    location,
-    path
+  location,
+  path
 }: RouteComponentProps & CustomRouteComponentProps) => {
-    const isWriteRoute = location.pathname === path;
+  const isWriteRoute = location.pathname === path;
 
-    const msUntilDeletion = 5000; // change before committing
-    const duration = new URLSearchParams(location.search).get(timeParam);
+  const msUntilDeletion = 5000; // change before committing
+  const duration = new URLSearchParams(location.search).get(timeParam);
 
-    if (!isWriteRoute) {
-        return null;
-    }
+  if (!isWriteRoute) {
+    return null;
+  }
 
-    if (!duration) {
-        return <Redirect to="/" />;
-    }
+  if (!duration) {
+    return <Redirect to="/" />;
+  }
 
-    return (
-        <Editor
-            totalTimeUntilDeletion={msUntilDeletion}
-            sessionLength={+duration / 60}
-        />
-    );
+  return (
+    <Editor
+      totalTimeUntilDeletion={msUntilDeletion}
+      sessionLength={+duration / 60}
+    />
+  );
 };
 
 const EditorViewWithRouter = withRouter(EditorView);
 
 const AppStyled = styled.div`
-    min-height: 100vh;
+  min-height: 100vh;
 `;
 
 /**
@@ -70,13 +70,13 @@ const AppStyled = styled.div`
  */
 
 export default function App() {
-    return (
-        <Router>
-            <AppStyled>
-                <Route exact path="/" component={Home} />
-                <Route path="/faqs" component={FAQs} />
-                <EditorViewWithRouter path="/write" />
-            </AppStyled>
-        </Router>
-    );
+  return (
+    <Router>
+      <AppStyled>
+        <Route exact path="/" component={Home} />
+        <Route path="/faqs" component={FAQs} />
+        <EditorViewWithRouter path="/write" />
+      </AppStyled>
+    </Router>
+  );
 }

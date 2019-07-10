@@ -2,11 +2,11 @@
 An app for focused writing. If you stop writing for longer than 5 seconds everything you have written disappears irretrievably. Use with caution.
 
 ## Try it out
-Try it on [aronadler.com/stream](http://aronadler.com/stream) or [murmuring-ocean-66611.herokuapp.com/](https://murmuring-ocean-66611.herokuapp.com/).
+Try it out on [www.streamtype.app](https://www.streamtype.app)
 
 ## Roadmap
 
-- [ ] Theme
+- [x] Theme
     - Either Solarized or "brutalist" black and white theme
     - Not changeable by user
 - [x] Select suitable font
@@ -14,16 +14,16 @@ Try it on [aronadler.com/stream](http://aronadler.com/stream) or [murmuring-ocea
 
 ### Home
 
-- [ ] Select how long session should be
-- [ ] Button to start session
+- [x] Select how long session should be
+- [x] Button to start session
 
 ### Editor
 
-- [ ] Timer for how long remaining until the end of the stream session
+- [x] Timer for how long remaining until the end of the stream session
     - Probably on top or mobile and in the right margin on desktop
-- [ ] Button for going back to Homepage
+- [x] Button for going back to Homepage
     - With warning that current session will be lost
-- [ ] When session is finished display export options buttons menu
+- [x] When session is finished display export options buttons menu
     - Only .txt download for now
-
+- [ ] From editor intercept browser back event and display same warning as when clicking on homepage button in UI
 

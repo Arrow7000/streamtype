@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "Courier Prime Sans";
-    src: url("../fonts/CourierPrimeSans.ttf");
+  font-family: "Courier Prime Sans";
+  src: url("../fonts/CourierPrimeSans.ttf");
 }
 
 @import url("https://fonts.googleapis.com/css?family=Bitter");
@@ -10,11 +10,11 @@ $fonts: "Josefin Sans", "Bitter", "Courier Prime Sans", sans-serif;
 
 html,
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: $fonts;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $fonts;
 }
 button {
-    font-family: $fonts;
+  font-family: $fonts;
 }
