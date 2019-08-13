@@ -2,7 +2,7 @@
 An app for focused writing. If you stop writing for longer than 5 seconds everything you have written disappears irretrievably. Use with caution.
 
 ## Try it out
-Try it out on [www.streamtype.app](https://www.streamtype.app)
+Try it out on [streamtype.app](https://streamtype.app)
 
 ## Roadmap
 
@@ -25,5 +25,5 @@ Try it out on [www.streamtype.app](https://www.streamtype.app)
     - With warning that current session will be lost
 - [x] When session is finished display export options buttons menu
     - Only .txt download for now
-- [ ] From editor intercept browser back event and display same warning as when clicking on homepage button in UI
+- [x] From editor intercept browser back event and display same warning as when clicking on homepage button in UI
 
