@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { transparentize, darken } from "polished";
 
-import useEditor, { EditorProps } from "./useEditor";
+import useEditor, { EditorProps, StateLabel } from "./useEditor";
 import * as theme from "./Theme";
 import LinkButton from "./LinkButton";
 import downloadFile from "./downloadFile";
@@ -109,28 +109,35 @@ const MenuButton = styled.button`
 `;
 
 interface EditorComponentProps extends EditorProps {
-  sessionLengthRemaining: number;
+  totalTimeUntilDeletion: number;
+  sessionLengthInSecs: number;
 }
 
-export function Editor({
-  text,
-  changeText,
-  sessionLengthRemaining,
-  timeLeftUntilDelete,
-  totalTimeUntilDeletion
-}: EditorComponentProps) {
-  const sessionOngoing = sessionLengthRemaining > 0;
-
-  const opacity = sessionOngoing
-    ? timeLeftUntilDelete / totalTimeUntilDeletion
-    : 1;
-
-  const sessLenAllSeconds = Math.ceil(sessionLengthRemaining / 1000);
+function getTimerText(sessionLengthInMsRemaining: number) {
+  const sessLenAllSeconds = Math.ceil(sessionLengthInMsRemaining / 1000);
 
   const sessLenMins = Math.floor(sessLenAllSeconds / 60);
   const sessLenSecs = "" + (sessLenAllSeconds - sessLenMins * 60);
 
   const timerText = `${sessLenMins}m ${sessLenSecs.padStart(2, "0")}s`;
+  return timerText;
+}
+
+export function Editor({
+  state,
+  text,
+  changeText,
+  totalTimeUntilDeletion,
+  sessionLengthInSecs
+}: EditorComponentProps) {
+  const inProg = StateLabel.InProgress;
+
+  const opacity =
+    state.state === inProg
+      ? state.timeLeftUntilDelete / totalTimeUntilDeletion
+      : 1;
+
+  const sessionOngoing = state.state === inProg;
 
   return (
     <StyledEditor>
@@ -145,7 +152,13 @@ export function Editor({
         >
           ⬅
         </BackButton>
-        <div>{sessionOngoing ? timerText : "Session ✅"}</div>
+        <div>
+          {state.state === inProg
+            ? getTimerText(state.sessionLengthInMsRemaining)
+            : state.state === StateLabel.NotStarted
+            ? getTimerText(sessionLengthInSecs * 1000)
+            : "Session ✅"}
+        </div>
       </TopBar>
       <StyledTextarea
         spellCheck={false}
@@ -172,13 +185,19 @@ export function Editor({
 
 interface ConnectedEditorProps {
   totalTimeUntilDeletion: number;
-  sessionLength: number;
+  sessionLengthInSecs: number;
 }
 
 export default function ConnectedEditor({
   totalTimeUntilDeletion,
-  sessionLength
+  sessionLengthInSecs
 }: ConnectedEditorProps) {
-  const editor = useEditor(sessionLength, totalTimeUntilDeletion);
-  return <Editor {...editor} />;
+  const editor = useEditor(sessionLengthInSecs, totalTimeUntilDeletion);
+  return (
+    <Editor
+      sessionLengthInSecs={sessionLengthInSecs}
+      totalTimeUntilDeletion={totalTimeUntilDeletion}
+      {...editor}
+    />
+  );
 }

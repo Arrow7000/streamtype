@@ -1,74 +1,95 @@
 import { useState } from "react";
 import useInterval from "./useInterval";
 
+export enum StateLabel {
+  NotStarted,
+  InProgress,
+  Finished
+}
+
+type EditorState =
+  | {
+      state: StateLabel.NotStarted;
+    }
+  | {
+      state: StateLabel.InProgress;
+      timeLeftUntilDelete: number;
+      sessionLengthInMsRemaining: number;
+    }
+  | {
+      state: StateLabel.Finished;
+    };
+
 export interface EditorProps {
+  state: EditorState;
   text: string;
   changeText: (text: string) => void;
-  restartSession: () => void;
-  timeLeftUntilDelete: number;
-  totalTimeUntilDeletion: number;
-  sessionLengthRemaining: number;
 }
 
 export default function useEditor(
-  sessionLength: number,
+  sessionLengthInSecs: number,
   totalTimeUntilDeletion: number
 ): EditorProps {
-  const sessionLengthInMs = sessionLength * 60 * 1000;
+  const sessionLengthInMs = sessionLengthInSecs * 1000;
 
   const [text, updateText] = useState("");
 
-  const [sessionRemaining, setSessionRemaining] = useState(sessionLengthInMs);
+  const [state, setState] = useState<EditorState>({
+    state: StateLabel.NotStarted
+  });
 
-  const restartSession = () => setSessionRemaining(sessionLengthInMs);
+  function changeText(textOrUpdater: ((oldText: string) => string) | string) {
+    updateText(textOrUpdater);
 
-  const [timeLeftUntilDelete, setTimeLeftUntilDelete] = useState(
-    totalTimeUntilDeletion
-  );
+    switch (state.state) {
+      case StateLabel.NotStarted:
+        setState({
+          state: StateLabel.InProgress,
+          sessionLengthInMsRemaining: sessionLengthInMs,
+          timeLeftUntilDelete: totalTimeUntilDeletion
+        });
+        break;
 
-  const tickRate = (1000 / 60) * 2;
+      case StateLabel.InProgress:
+        setState({
+          ...state,
+          timeLeftUntilDelete: totalTimeUntilDeletion
+        });
+        break;
+    }
+  }
 
-  const sessionExpired = sessionRemaining <= 0;
+  const tickRate = (1000 / 60) * 5; // 12 fps
 
   useInterval(() => {
-    if (!sessionExpired) {
-      setSessionRemaining(sessRem => {
-        if (text !== "") {
-          return sessRem - tickRate > 0 ? sessRem - tickRate : 0;
-        } else {
-          return sessRem;
-        }
-      });
-
-      setTimeLeftUntilDelete(timeLeft => {
-        if (text !== "") {
-          return timeLeft - tickRate > 0 ? timeLeft - tickRate : 0;
-        } else {
-          return timeLeft;
-        }
+    if (state.state === StateLabel.InProgress) {
+      setState({
+        ...state,
+        sessionLengthInMsRemaining: state.sessionLengthInMsRemaining - tickRate,
+        timeLeftUntilDelete: state.timeLeftUntilDelete - tickRate
       });
     }
   }, tickRate);
 
-  function changeText(textOrUpdater: ((oldText: string) => string) | string) {
-    updateText(textOrUpdater);
-    setTimeLeftUntilDelete(totalTimeUntilDeletion);
-  }
+  const sessionCompleted =
+    state.state === StateLabel.InProgress &&
+    state.sessionLengthInMsRemaining <= 0;
 
-  if (sessionExpired) {
+  const sessionExpired =
+    state.state === StateLabel.InProgress && state.timeLeftUntilDelete <= 0;
+
+  if (sessionCompleted) {
+    setState({ state: StateLabel.Finished });
     console.log("Session finished!");
-  } else if (timeLeftUntilDelete <= 0) {
-    changeText("");
-    setSessionRemaining(sessionLength);
+  } else if (sessionExpired) {
+    updateText("");
+    setState({ state: StateLabel.NotStarted });
     console.log("All text deleted");
   }
 
   return {
     text,
-    changeText,
-    restartSession,
-    timeLeftUntilDelete,
-    totalTimeUntilDeletion,
-    sessionLengthRemaining: sessionRemaining
+    state,
+    changeText
   };
 }

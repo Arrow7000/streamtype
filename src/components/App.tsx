@@ -23,7 +23,7 @@ const EditorView = ({
 }: RouteComponentProps & CustomRouteComponentProps) => {
   const isWriteRoute = location.pathname === path;
 
-  const msUntilDeletion = 5000; // change before committing
+  const msUntilDeletion = 5000;
   const duration = new URLSearchParams(location.search).get(timeParam);
 
   if (!isWriteRoute) {
@@ -37,7 +37,7 @@ const EditorView = ({
   return (
     <Editor
       totalTimeUntilDeletion={msUntilDeletion}
-      sessionLength={+duration / 60}
+      sessionLengthInSecs={+duration}
     />
   );
 };
