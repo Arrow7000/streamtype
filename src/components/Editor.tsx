@@ -10,7 +10,7 @@ import downloadFile from "./downloadFile";
 interface TextAreaProps {
   textOpacity: number;
   isInView: boolean;
-  sessionOngoing: boolean;
+  sessionFinished: boolean;
 }
 
 // Constants
@@ -38,8 +38,8 @@ const StyledTextarea = styled.textarea.attrs(
   font-family: "Operator Mono", "Consolas", sans-serif;
   box-sizing: border-box;
   border: 0;
-  grid-row: ${({ sessionOngoing }) =>
-    !sessionOngoing ? "main-row" : "main-row / button-menu"};
+  grid-row: ${({ sessionFinished }) =>
+    sessionFinished ? "main-row" : "main-row / button-menu"};
   grid-column: main-col;
   z-index: 0;
   caret-color: ${theme.caret};
@@ -137,7 +137,7 @@ export function Editor({
       ? state.timeLeftUntilDelete / totalTimeUntilDeletion
       : 1;
 
-  const sessionOngoing = state.state === inProg;
+  const sessionFinished = state.state === StateLabel.Finished;
 
   return (
     <StyledEditor>
@@ -167,9 +167,9 @@ export function Editor({
         value={text}
         textOpacity={opacity}
         isInView={true}
-        sessionOngoing={sessionOngoing}
+        sessionFinished={sessionFinished}
       />
-      {!sessionOngoing && (
+      {sessionFinished && (
         <ExportMenu>
           <MenuButton onClick={() => downloadFile("stream.txt", text)}>
             Export as .txt
